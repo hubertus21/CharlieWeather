@@ -16,6 +16,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.charlieweather.data.CityInfo;
 import com.example.charlieweather.data.DataBase;
@@ -39,7 +40,7 @@ class JSONAsyncTask extends AsyncTask<String[], Void, List<CityInfo>> {
 	protected void onPostExecute(List<CityInfo> result) {
 		dialog.dismiss();
 		db.setList(result);
-		System.out.println(db.getList().get(0).getName());
+		System.out.println(db.getList().get(2).getList().get(0).getDescription());
 		super.onPostExecute(result);
 	}
 
@@ -56,15 +57,6 @@ class JSONAsyncTask extends AsyncTask<String[], Void, List<CityInfo>> {
 				HttpResponse httpResponse = httpClient.execute(httpPost);
 				HttpEntity httpEntity = httpResponse.getEntity();
 				is = httpEntity.getContent();
-			} catch (ClientProtocolException e) {
-				e.printStackTrace();
-				return null;
-			} catch (IOException e) {
-				e.printStackTrace();
-				return null;
-			}
-
-			try {
 				BufferedReader reader = new BufferedReader(
 						new InputStreamReader(is, "UTF-8"));
 				StringBuilder sb = new StringBuilder();

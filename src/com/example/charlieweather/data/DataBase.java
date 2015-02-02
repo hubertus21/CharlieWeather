@@ -37,8 +37,8 @@ public class DataBase {
 	}
 	public void setCords(){
 		cities[0]=new PointLD(35,139);
-		cities[1]=new PointLD(-0.12574,51.50853);
-		cities[2]=new PointLD(-0.12574,51.50853);
+		cities[1]=new PointLD(50.0467657,20.0048731);
+		cities[2]=new PointLD(49.9874932,19.7339459);
 		cities[3]=new PointLD(-0.12574,51.50853);
 		cities[4]=new PointLD(-0.12574,51.50853);
 	}

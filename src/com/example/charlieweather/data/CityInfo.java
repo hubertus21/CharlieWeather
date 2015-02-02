@@ -19,6 +19,9 @@ public class CityInfo {
 	public void setList(List<ForecastForOneDay> list) {
 		this.list = list;
 	}
+	public void addForecastForOneDay(ForecastForOneDay f){
+		list.add(f);
+	}
 	public String getName() {
 		return name;
 	}
