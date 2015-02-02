@@ -14,11 +14,18 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
+<<<<<<< HEAD
         public static final int seekBar1=0x7f060001;
         public static final int termometerView1=0x7f060000;
+=======
+        public static final int pager=0x7f060000;
+>>>>>>> SwipeView - working but not finished
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
+        public static final int fragment_games=0x7f030001;
+        public static final int fragment_movies=0x7f030002;
+        public static final int fragment_top_rated=0x7f030003;
     }
     public static final class string {
         public static final int app_name=0x7f040000;
