@@ -1,4 +1,7 @@
 package com.example.charlieweather;
+import java.util.ArrayList;
+import java.util.List;
+
 import tabsswipe.adapter.TabsPagerAdapter;
 import android.os.Bundle;
 import android.app.ActionBar;
@@ -13,8 +16,9 @@ public class MainActivity extends FragmentActivity implements TabListener {
 	private ViewPager viewPager;
     private TabsPagerAdapter mAdapter;
     private ActionBar actionBar;
+    public static List<City> cities;
     // Tab titles
-    private String[] tabs = { "Top Rated", "Games", "Movies" };
+    private String[] tabs = { "Kraków", "Nowy Jork", "Szikago", "Tokyo", "Smoleñsk" };
  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,7 @@ public class MainActivity extends FragmentActivity implements TabListener {
             actionBar.addTab(actionBar.newTab().setText(tab_name)
                     .setTabListener(this));
         }
+        setup();
         
         viewPager.setOnPageChangeListener(
                 new ViewPager.SimpleOnPageChangeListener() {
@@ -45,6 +50,13 @@ public class MainActivity extends FragmentActivity implements TabListener {
                 });
 }
 
+	private void setup() {
+		cities = new ArrayList<City>();
+		for(int i=0;i<5;i++){
+			cities.add(new City(tabs[i]));
+		}
+	}
+
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
 		// TODO Auto-generated method stub
@@ -54,7 +66,7 @@ public class MainActivity extends FragmentActivity implements TabListener {
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
 		// TODO Auto-generated method stub
-		
+		viewPager.setCurrentItem(tab.getPosition());
 	}
 
 	@Override
