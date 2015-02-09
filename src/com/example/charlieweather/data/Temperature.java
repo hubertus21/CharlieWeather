@@ -1,5 +1,6 @@
 package com.example.charlieweather.data;
 
+
 public class Temperature {
 
 	private double day;
