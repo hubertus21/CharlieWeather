@@ -3,14 +3,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tabsswipe.adapter.TabsPagerAdapter;
-import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.widget.Toast;
+
+import com.example.charlieweather.data.DataBase;
 public class MainActivity extends FragmentActivity implements TabListener {
 
 	private ViewPager viewPager;
@@ -20,11 +25,24 @@ public class MainActivity extends FragmentActivity implements TabListener {
     // Tab titles
     private String[] tabs = { "Kraków", "Nowy Jork", "Szikago", "Tokyo", "Smoleñsk" };
  
+    
+    
+    private DataBase dataBase;
+	private ProgressDialog dialog;
+	
+	
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
  
+        dataBase=dataBase.getInstance();
+        dataBase.setCords();
+        loadData();
+        
+        
+        
         // Initilization
         viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getActionBar();
@@ -73,5 +91,18 @@ public class MainActivity extends FragmentActivity implements TabListener {
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
 		// TODO Auto-generated method stub
 		
+	}
+	private void loadData(){
+	    	if(isNetworkAvailable()){
+	    	dialog=ProgressDialog.show(this,"","Downloading json...");
+	    	JSONAsyncTask task=new JSONAsyncTask(dataBase,dialog);
+	    	task.execute(dataBase.getURL());}
+	    	
+	}
+	private boolean isNetworkAvailable(){
+    	ConnectivityManager connectivityManager 
+        = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+  NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+  return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 	}
 }

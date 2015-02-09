@@ -18,6 +18,9 @@ public class City extends Fragment {
 	private String name;
 	private View rootView;
 	ListView nextDaysView;
+	public City(){
+		
+	}
 	public City(String _name){
 		name = _name;
 	}
