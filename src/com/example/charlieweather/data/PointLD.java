@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class PointLD {
 
 	private BigDecimal lat,lon;
-	
+	private String cityname;
 	public PointLD(BigDecimal lat, BigDecimal lon) {
 		this.lat=lat;
 		this.lon=lon;
@@ -15,7 +15,9 @@ public class PointLD {
 		lat=BigDecimal.valueOf(d);
 		lon=BigDecimal.valueOf(e);
 	}
-
+	public PointLD(String a){
+		cityname=a;
+	}
 	public BigDecimal getLat() {
 		return lat;
 	}
