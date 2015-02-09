@@ -1,6 +1,8 @@
 package com.example.charlieweather;
 
 
+import java.util.List;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,10 +14,10 @@ import android.widget.TextView;
 
 public class City extends Fragment {
 	
-	
+	private List<Weather> nextDays;
 	private String name;
 	private View rootView;
-	ListView nextDays;
+	ListView nextDaysView;
 	public City(String _name){
 		name = _name;
 	}
@@ -30,6 +32,9 @@ public class City extends Fragment {
     }
 
 	private void setup() {
-		nextDays = (ListView)rootView.findViewById(R.id.nextDaysListView);
+		nextDaysView = (ListView)rootView.findViewById(R.id.nextDaysListView);
+		for(int i=0;i<10;i++){
+			nextDays.add(new Weather("Poniedzia³ek","9 LUT","-3C"));
+		}
 	}
 }

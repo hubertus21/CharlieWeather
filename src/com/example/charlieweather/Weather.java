@@ -7,6 +7,14 @@ public class Weather {
 	private String temperature;
 	private String day;
 	private String date;
+	
+	
+	public Weather(String _day,String _date, String _temperature){
+		day = _day;
+		date = _date;
+		temperature = _temperature;
+	}
+	
 	public Images getImage() {
 		return image;
 	}
