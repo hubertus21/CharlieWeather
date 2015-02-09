@@ -2,39 +2,39 @@ package com.example.charlieweather;
 
 import android.R.bool;
 import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.view.TextureView;
-import android.widget.TextView;
-
-import com.example.charlieweather.data.DataBase;
-
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 
 public class MainActivity extends Activity {
-	private DataBase dataBase;
-	private ProgressDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dataBase=dataBase.getInstance();
-        dataBase.setCords();
-        setup();
+        final TermometerView tView = (TermometerView)findViewById(R.id.termometerView1);
+        SeekBar sBar = (SeekBar)findViewById(R.id.seekBar1);
+        sBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+			
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+				// TODO Auto-generated method stub
+				
+			}
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress,
+					boolean fromUser) {
+					tView.setTemperature(progress-20, progress-20);
+					tView.invalidate();
+			}
+		});
     }
-    public void setup(){
-    	if(isNetworkAvailable()){
-    	dialog=ProgressDialog.show(this,"","Downloading json...");
-    	JSONAsyncTask task=new JSONAsyncTask(dataBase,dialog);
-    	task.execute(dataBase.getURL());}
-    	TextView t=(TextView)findViewById(R.id.textView1);
-    }
-    private boolean isNetworkAvailable(){
-    	ConnectivityManager connectivityManager 
-        = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-  NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-  return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-	}
 }
