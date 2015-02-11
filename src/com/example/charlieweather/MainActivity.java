@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tabsswipe.adapter.TabsPagerAdapter;
+import SQL.CityDataSource;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.charlieweather.data.CityInfo;
 import com.example.charlieweather.data.DataBase;
+import com.example.charlieweather.data.IsNetworkAvailable;
 public class MainActivity extends FragmentActivity implements TabListener {
 
 	private ViewPager viewPager;
@@ -26,11 +28,13 @@ public class MainActivity extends FragmentActivity implements TabListener {
     public static List<City> cities;
     //public static List<CityInfo> citiesInfo;
     // Tab titles
-    private String[] tabs = {"1","2","3","4","5"};
+    private String[] tabs = { "Kraków", "Nowy Jork", "Szikago", "Tokyo", "Smoleñsk" };
+ 
     
     
     private DataBase dataBase;
 	private ProgressDialog dialog;
+	private CityDataSource dataSource;
 	
 	
 	
@@ -39,8 +43,11 @@ public class MainActivity extends FragmentActivity implements TabListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
  
+        IsNetworkAvailable.context=getApplicationContext();
         dataBase=dataBase.getInstance();
         dataBase.setCords();
+        dataSource=new CityDataSource(this);
+		dataSource.open();
         loadData();
         
         
@@ -54,15 +61,12 @@ public class MainActivity extends FragmentActivity implements TabListener {
         actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);        
  
-        setup();
-        
         // Adding Tabs
         for (String tab_name : tabs) {
             actionBar.addTab(actionBar.newTab().setText(tab_name)
                     .setTabListener(this));
         }
-       
-        
+        setup();
         
         viewPager.setOnPageChangeListener(
                 new ViewPager.SimpleOnPageChangeListener() {
@@ -72,8 +76,6 @@ public class MainActivity extends FragmentActivity implements TabListener {
                       actionBar.setSelectedNavigationItem(position);              
                       }
                 });
-        Toast.makeText(getApplicationContext(), Integer.toString(dataBase.getList().size()), Toast.LENGTH_LONG).show();
-        
 }
 
 	private void setup() {

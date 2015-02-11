@@ -98,8 +98,6 @@ public class ParseJson {
 			JSONObject response = new JSONObject(jsonData);
 			if (response.has("city")) {
 				JSONObject cityInfo = response.getJSONObject("city");
-				if (cityInfo.has("id"))
-					city.setID(cityInfo.getInt("id"));
 				if (cityInfo.has("name"))
 					city.setName(cityInfo.getString("name"));
 				if (cityInfo.has("coord")) {

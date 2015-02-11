@@ -9,7 +9,7 @@ public class Temperature {
 	private double night;
 	private double eve;
 	private double morning;
-	
+	private Long ID,IDOwner;
 	
 	public double getDay() {
 		return day;
@@ -46,6 +46,18 @@ public class Temperature {
 	}
 	public void setMorning(double morning) {
 		this.morning = morning;
+	}
+	public Long getID() {
+		return ID;
+	}
+	public void setID(Long iD) {
+		ID = iD;
+	}
+	public Long getIDOwner() {
+		return IDOwner;
+	}
+	public void setIDOwner(Long iDOwner) {
+		IDOwner = iDOwner;
 	}
 	
 }

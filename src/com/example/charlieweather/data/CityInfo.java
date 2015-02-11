@@ -7,7 +7,7 @@ import java.util.List;
 public class CityInfo {
 
 	private List<ForecastForOneDay> list=new ArrayList<ForecastForOneDay>();
-	private int ID;
+	private Long ID;
 	private String name;
 	private PointLD coords;
 	private String country;
@@ -38,7 +38,7 @@ public class CityInfo {
 		this.coords = new PointLD(lat,lon);
 	}
 	public void setCoords(String lat,String lon) {
-		
+		this.coords=new PointLD(Double.valueOf(lat),Double.valueOf(lon));
 	}
 	public String getCountry() {
 		return country;
@@ -46,11 +46,15 @@ public class CityInfo {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	public int getID() {
+	public Long getID() {
 		return ID;
 	}
-	public void setID(int iD) {
+	public void setID(Long iD) {
 		ID = iD;
+	}
+	public void setCoords(double lat, double lon) {
+		this.coords = new PointLD(lat,lon);
+		
 	}
 	
 	
