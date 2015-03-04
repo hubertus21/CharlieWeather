@@ -14,6 +14,9 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import com.example.charlieweather.data.DataBase;
 public class MainActivity extends FragmentActivity implements TabListener {
@@ -36,12 +39,32 @@ public class MainActivity extends FragmentActivity implements TabListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
- 
+        final TermometerView tView =(TermometerView)findViewById(R.id.termometerView1);
+        SeekBar sb = (SeekBar)findViewById(R.id.seekBar1);
+        sb.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+			public void onProgressChanged(SeekBar arg0, int arg1, boolean arg2) {
+				// TODO Auto-generated method stub
+				tView.setTemperature(arg1-20,arg1-20);
+				tView.invalidate();
+			}
+
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
         dataBase=dataBase.getInstance();
         dataBase.setCords();
         loadData();
         
-        
+        /*
         
         // Initilization
         viewPager = (ViewPager) findViewById(R.id.pager);
@@ -65,7 +88,7 @@ public class MainActivity extends FragmentActivity implements TabListener {
                     public void onPageSelected(int position) {
                       actionBar = getActionBar();
                       actionBar.setSelectedNavigationItem(position);                    }
-                });
+                });*/
 }
 
 	private void setup() {
@@ -95,7 +118,14 @@ public class MainActivity extends FragmentActivity implements TabListener {
 	private void loadData(){
 	    	if(isNetworkAvailable()){
 	    	dialog=ProgressDialog.show(this,"","Downloading json...");
-	    	JSONAsyncTask task=new JSONAsyncTask(dataBase,dialog);
+	    	JSONAsyncTask task=new JSONAsyncTask(dataBase,dialog,new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					Log.i("ASYNC_TASK","Dzia³a");
+				}
+			});
 	    	task.execute(dataBase.getURL());}
 	    	
 	}

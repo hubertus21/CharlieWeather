@@ -19,8 +19,8 @@ public class TermometerView extends View {
 	private Paint outerTermometerPaint = new Paint();
 	private Path outerTermometerPath = new Path();
 	
-	private double maxTemp = -5;
-	private double minTemp = 0;
+	private double maxTemp = 10;
+	private double minTemp = 10;
 	
 
 
@@ -37,6 +37,7 @@ public class TermometerView extends View {
 		super.onSizeChanged(w, h, oldw, oldh);
 		if(w * h != 0){
 			this.calculateInner();
+	    	this.calculateOuter();
 			}
 	}
     
@@ -44,7 +45,6 @@ public class TermometerView extends View {
     	innerTermometerPath = new Path();
         Point termLowerCenter = new Point(this.getWidth()/2,(int) (this.getHeight() * 0.8));
         int termRadius = (int) (this.getWidth()* 0.1);
-		//innerTermometerPaint.setColor(this.calculateInnerColor());
 		innerTermometerPaint.setShader(new LinearGradient(0, 0, termRadius, 0, this.calculateInnerColor(), this.calculateInnerDarkerColor() , Shader.TileMode.MIRROR));
         innerTermometerPaint.setAlpha(128);
 
@@ -52,14 +52,28 @@ public class TermometerView extends View {
         innerTermometerPath.addCircle(termLowerCenter.x,termLowerCenter.y, termRadius, Direction.CCW);
 
         
-        //innerTermometerPath.addRect(, Direction.CCW);
-        innerTermometerPath.addRoundRect(new RectF(termLowerCenter.x - (termRadius/2), (float) (termLowerCenter.y - this.calculateInnerLength()), termLowerCenter.x + (termRadius/2), termLowerCenter.y),20,20,Direction.CCW);
+       innerTermometerPath.addRoundRect(new RectF(termLowerCenter.x - (termRadius/2), (float) (termLowerCenter.y - this.calculateInnerLength()), termLowerCenter.x + (termRadius/2), termLowerCenter.y),20,20,Direction.CCW);
+    
+    }
+    protected void calculateOuter(){
+    	outerTermometerPath = new Path();
+        Point termLowerCenter = new Point(this.getWidth()/2,(int) (this.getHeight() * 0.8));
+        int termRadius = (int) (this.getWidth()* 0.11);
+
+        outerTermometerPaint.setShader(new LinearGradient(0, 0, termRadius * 0.6f, 1, Color.argb(255,200,200,200), Color.argb(128,200,200,200) , Shader.TileMode.MIRROR));
+        outerTermometerPaint.setAlpha(64);
+
+        outerTermometerPath.moveTo(0, 0);
+        outerTermometerPath.addCircle(termLowerCenter.x,termLowerCenter.y, termRadius, Direction.CCW);
+
+        outerTermometerPath.addRoundRect(new RectF(termLowerCenter.x - (termRadius/2), (float) (termLowerCenter.y - (this.getHeight() * 0.7)), termLowerCenter.x + (termRadius/2), termLowerCenter.y),20,20,Direction.CCW);
     }
     
     public void setTemperature(int maxTemp, int minTemp){
     	this.maxTemp = maxTemp;
     	this.minTemp = minTemp;
     	this.calculateInner();
+    	this.calculateOuter();
     	
     }
 
@@ -87,35 +101,49 @@ public class TermometerView extends View {
     	else if(avgTemp < -10)
     		return Color.rgb(0,0,225);
 
-    	avgTemp += 10;
-    	int redColor = (int) (((225/40) * avgTemp));
-    	avgTemp -= 20;
-    	int greenColor =0;//  (int) (128 - ((225/80) * avgTemp));
+    	avgTemp -= 10;
+    	int redColor = (int) (((225/20) * avgTemp) );
+    	redColor = trimColor(redColor,225);
+
+    	int greenColor= (int) (225 - Math.abs((225/20) * avgTemp));
+    	
     	avgTemp += 20;
-    	int blueColor = (int) (225 - (225/40) * avgTemp);
-    	
-    	
+    	int blueColor = (int) (225 - (225/20) * avgTemp);
+    	blueColor = trimColor(blueColor,225);
+
     	return Color.rgb( redColor, greenColor , blueColor);
+    }
+    
+    protected int trimColor(int color, int maxColor){
+    	if(color < 0)
+    		return 0;
+    	else if (color > maxColor)
+    		return maxColor;
+    	
+    	return color;
+    		
     }
 
     public int calculateInnerDarkerColor(){
-
     	double avgTemp = maxTemp + minTemp;
     	avgTemp /=2;
 
     	if(avgTemp > 30)
-    		return Color.rgb(255,30,30);
+    		return Color.rgb(225,0,0);
     	else if(avgTemp < -10)
-    		return Color.rgb(30,30,255);
+    		return Color.rgb(0,0,225);
+
+    	avgTemp -= 10;
+    	int redColor = (int) (((225/20) * avgTemp) );
+    	redColor = trimColor(redColor,225);
     	
-    	avgTemp += 10;
-    	int redColor = (int) (((225/40) * avgTemp));
-    	avgTemp -= 20;
-    	int greenColor = 0;// (int) (113 - ((225/40) * avgTemp));
+    	int greenColor= (int) (225 - Math.abs((225/20) * avgTemp));
+    	
     	avgTemp += 20;
-    	int blueColor = (int) (225 - (225/40) * avgTemp);
-    	Log.i("COLOR",String.valueOf(redColor) + "," + String.valueOf(greenColor) + "," + String.valueOf(blueColor));
-    	return Color.rgb( redColor + 30, greenColor + 30, blueColor + 30);
+    	int blueColor = (int) (225 - (225/20) * avgTemp);
+    	blueColor = trimColor(blueColor,225);
+
+    	return Color.rgb( redColor + 30, greenColor +30, blueColor+30);
     }
 
 	@Override

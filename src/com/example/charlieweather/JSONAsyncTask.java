@@ -26,14 +26,17 @@ class JSONAsyncTask extends AsyncTask<String[], Void, List<CityInfo>> {
 
 	private DataBase db;
 	private ProgressDialog dialog;
+	private Runnable postTaskRunnable;
 
-	public JSONAsyncTask(DataBase dataBase) {
+	public JSONAsyncTask(DataBase dataBase,Runnable postTask) {
 		db = dataBase;
+		postTaskRunnable = postTask;
 	}
 
-	public JSONAsyncTask(DataBase dataBase, ProgressDialog dialog) {
+	public JSONAsyncTask(DataBase dataBase, ProgressDialog dialog,Runnable postTask) {
 		db = dataBase;
 		this.dialog = dialog;
+		postTaskRunnable = postTask;
 	}
 
 	@Override
@@ -41,6 +44,7 @@ class JSONAsyncTask extends AsyncTask<String[], Void, List<CityInfo>> {
 		dialog.dismiss();
 		db.setList(result);
 		System.out.println(db.getList().get(2).getList().get(0).getDescription());
+		postTaskRunnable.run();
 		super.onPostExecute(result);
 	}
 
