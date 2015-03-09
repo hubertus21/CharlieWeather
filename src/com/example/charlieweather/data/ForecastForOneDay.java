@@ -3,8 +3,12 @@ package com.example.charlieweather.data;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.net.ParseException;
+
 public class ForecastForOneDay {
 
+	private Long ID;
+	private Long ID_owner;
 	private Date date=new Date();
 	private String imageUrl;
 	private Temperature temperature=new Temperature();
@@ -28,9 +32,22 @@ public class ForecastForOneDay {
 	public void setDateUnix(String unixTime){
 		long dv = Long.valueOf(unixTime)*1000;
 		date = new java.util.Date(dv);
+		System.out.println(new SimpleDateFormat(Formats.DATE_FORMAT).format(date));
 	}
 	public String getDateString(){
 		return new SimpleDateFormat(Formats.DATE_FORMAT).format(date);
+	}
+	public Long getUnixDate(){
+		return date.getTime()/1000;
+	}
+	public void setDateFromString(String dtStart){
+		SimpleDateFormat  format = new SimpleDateFormat(Formats.DATE_FORMAT);  
+		    Date date;
+			try {
+				date = format.parse(dtStart);
+			} catch (java.text.ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();}
 	}
 	public String getImageUrl() {
 		return imageUrl;
@@ -98,6 +115,16 @@ public class ForecastForOneDay {
 	public void setRain(double rain) {
 		this.rain = rain;
 	}
-	
-	
+	public Long getID() {
+		return ID;
+	}
+	public void setID(Long iD) {
+		ID = iD;
+	}
+	public Long getID_owner() {
+		return ID_owner;
+	}
+	public void setID_owner(Long iD_owner) {
+		ID_owner = iD_owner;
+	}
 }

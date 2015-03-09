@@ -8,4 +8,5 @@ public class Formats {
 	public static String PART_OF_IMAGE_ADDRESS="http://openweathermap.org/img/w/";
 	public static String EXTENSION_TO_ADDRESS=".png";
 	public static String DATE_FORMAT="dd MM, yyyy";
+	public static String ADDRESS_FROM_NAME="http://api.openweathermap.org/data/2.5/forecast/daily?cnt=10&mode=json&q=";
 }

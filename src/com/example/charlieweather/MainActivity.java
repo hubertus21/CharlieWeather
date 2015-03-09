@@ -48,7 +48,8 @@ public class MainActivity extends FragmentActivity implements TabListener {
         dataBase.setCords();
         dataSource=new CityDataSource(this);
 		dataSource.open();
-        loadData();
+		if(dataBase.getList().isEmpty())
+			loadData();
         
         
         
@@ -106,29 +107,38 @@ public class MainActivity extends FragmentActivity implements TabListener {
 		
 	}
 	private void loadData(){
-	    	if(isNetworkAvailable()){
-	    	dialog=ProgressDialog.show(this,"","Downloading json...");
-	    	JSONAsyncTask task=new JSONAsyncTask(dataBase,dialog/*,new Runnable() {
+	    	if(IsNetworkAvailable.isNetworkAvailable()){
+	    		if(dataSource.checkDate())
+	    		{
+	    			dataBase.setList(dataSource.getAllInfo());
+	    		}
+	    		else{
+	    		dialog=ProgressDialog.show(this,"","Downloading json...");
+	    		JSONAsyncTask task=new JSONAsyncTask(dataBase,dialog,dataSource, new Runnable() {
+					
+					@Override
+					public void run() {
+						
+					}
+				});
+	    		task.execute(dataBase.getURL());
+	    		}}else
+	    			dataBase.setList(dataSource.getAllInfo());
+	}
+	private void refreshData(){
+		if(IsNetworkAvailable.isNetworkAvailable()){
+			dialog=ProgressDialog.show(this,"","Downloading json...");
+    		JSONAsyncTask task=new JSONAsyncTask(dataBase,dialog,dataSource,new Runnable() {
+				
+				@Override
 				public void run() {
-					SetContent();					==czekam na commit z nowym konstruktorem od huberta
+					
 				}
-			}*/);
-	    	task.execute(dataBase.getURL());}
-	    	
-	}
-	private boolean isNetworkAvailable(){
-    	ConnectivityManager connectivityManager 
-        = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-  NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-  return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-	}
-	
-	public void SetContent(){
-		for(int i=0;i<5;i++){
-			actionBar.getTabAt(i).setText(dataBase.getList().get(i).getName().toString());
-			tabs[i] = dataBase.getList().get(i).getName().toString();
-			
-		}
+			});
+    		task.execute(dataBase.getURL());
+		}else
+			Toast.makeText(getApplicationContext(),getResources().getText(R.string.Internet_Is_Disabled),Toast.LENGTH_LONG).show();
 	}
 	
 }
+	

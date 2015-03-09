@@ -4,34 +4,39 @@ import java.math.BigDecimal;
 
 public class PointLD {
 
-	private BigDecimal lat,lon;
-	private String cityname;
-	public PointLD(BigDecimal lat, BigDecimal lon) {
+	private double lat=0.0;
+	private double lon=0.0;
+	private String cityname="null";
+	public PointLD(double lat, double lon) {
 		this.lat=lat;
 		this.lon=lon;
 	}
 
-	public PointLD(double d, double e) {
-		lat=BigDecimal.valueOf(d);
-		lon=BigDecimal.valueOf(e);
-	}
 	public PointLD(String a){
 		cityname=a;
 	}
-	public BigDecimal getLat() {
+	public double getLat() {
 		return lat;
 	}
 
-	public void setLat(BigDecimal lat) {
+	public void setLat(double lat) {
 		this.lat = lat;
 	}
 
-	public BigDecimal getLon() {
+	public double getLon() {
 		return lon;
 	}
 
-	public void setLon(BigDecimal lon) {
+	public void setLon(double lon) {
 		this.lon = lon;
+	}
+
+	public String getCityname() {
+		return cityname;
+	}
+
+	public void setCityname(String cityname) {
+		this.cityname = cityname;
 	}
 	
 	

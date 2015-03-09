@@ -14,6 +14,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import SQL.CityDataSource;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -26,21 +27,26 @@ class JSONAsyncTask extends AsyncTask<String[], Void, List<CityInfo>> {
 
 	private DataBase db;
 	private ProgressDialog dialog;
+	private CityDataSource dataSource;
+	private Runnable runnable;
 
-	public JSONAsyncTask(DataBase dataBase) {
+	public JSONAsyncTask(DataBase dataBase,Runnable r) {
 		db = dataBase;
+		runnable=r;
 	}
 
-	public JSONAsyncTask(DataBase dataBase, ProgressDialog dialog) {
+	public JSONAsyncTask(DataBase dataBase, ProgressDialog dialog, CityDataSource dataSource,Runnable r) {
 		db = dataBase;
 		this.dialog = dialog;
+		this.dataSource=dataSource;
+		runnable=r;
 	}
 
 	@Override
 	protected void onPostExecute(List<CityInfo> result) {
 		dialog.dismiss();
 		db.setList(result);
-		System.out.println(db.getList().get(2).getList().get(0).getDescription());
+		runnable.run();
 		super.onPostExecute(result);
 	}
 
@@ -50,6 +56,7 @@ class JSONAsyncTask extends AsyncTask<String[], Void, List<CityInfo>> {
 		String json = "";
 		String stringURL[] = params[0];
 		List<CityInfo> cityInfo = new ArrayList<CityInfo>();
+		dataSource.clearBase();
 		for (int i = 0; i < stringURL.length; i++) {
 			DefaultHttpClient httpClient = new DefaultHttpClient();
 			HttpPost httpPost = new HttpPost(stringURL[i]);
@@ -66,7 +73,7 @@ class JSONAsyncTask extends AsyncTask<String[], Void, List<CityInfo>> {
 				}
 				is.close();
 				json = sb.toString();
-				cityInfo.add(ParseJson.getListOfForecastFromString(json));
+				cityInfo.add(dataSource.createCityInfo(ParseJson.getListOfForecastFromString(json)));
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 				return null;
@@ -75,6 +82,7 @@ class JSONAsyncTask extends AsyncTask<String[], Void, List<CityInfo>> {
 				return null;
 			}
 		}
+		
 		return cityInfo;
 	}
 

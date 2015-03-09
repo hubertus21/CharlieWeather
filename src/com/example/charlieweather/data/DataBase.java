@@ -25,9 +25,8 @@ public class DataBase {
 		return list;
 	}
 
-	public String addNewCity(){
+	public void addNewCity(){
 		
-		return "asd";
 	}
 	public void setList(List<CityInfo> list) {
 		this.list = list;
@@ -36,13 +35,16 @@ public class DataBase {
 		date=Calendar.getInstance().getTime();
 		String[] urls=new String[cities.size()];
 		for(int i=0;i<urls.length;i++){
+			if(cities.get(i).getCityname()!="null")
+				urls[i]=Formats.ADDRESS_FROM_NAME+cities.get(i).getCityname();
+			else
 			urls[i]=Formats.START_ADDRESS+cities.get(i).getLat()+Formats.ADDRESS_LON+cities.get(i).getLon()+Formats.ADDRESS;
 			System.out.println(urls[i]);}
 		return urls;
 	}
 	
 	public void setCords(){
-		cities.add(new PointLD(35,139));
+		cities.add(new PointLD("Kraków"));
 		cities.add(new PointLD(50.0467657,20.0048731));
 		cities.add(new PointLD(49.9874932,19.7339459));
 		cities.add(new PointLD(-0.12574,51.50853));

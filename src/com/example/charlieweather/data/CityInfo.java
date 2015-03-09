@@ -8,9 +8,9 @@ public class CityInfo {
 
 	private List<ForecastForOneDay> list=new ArrayList<ForecastForOneDay>();
 	private Long ID;
-	private String name;
+	private String name="asd";
 	private PointLD coords;
-	private String country;
+	private String country="asd";
 	
 	
 	public List<ForecastForOneDay> getList() {
@@ -33,9 +33,6 @@ public class CityInfo {
 	}
 	public void setCoords(PointLD coords) {
 		this.coords = coords;
-	}
-	public void setCoords(BigDecimal lat,BigDecimal lon) {
-		this.coords = new PointLD(lat,lon);
 	}
 	public void setCoords(String lat,String lon) {
 		this.coords=new PointLD(Double.valueOf(lat),Double.valueOf(lon));

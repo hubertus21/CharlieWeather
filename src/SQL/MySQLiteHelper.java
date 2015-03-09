@@ -11,61 +11,66 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 		// TODO Auto-generated constructor stub
 	}
-	private static final String DATABASE_NAME = "comments.db";
+
+	private static final String DATABASE_NAME = "Wheather.db";
 	private static final int DATABASE_VERSION = 1;
-	
 
 	public static final String TABLE_CITY = "cities";
 	public static final String COLUMN_ID = "_id";
 	public static final String COLUMN_NAME = "_name";
-	public static final String COLUMN_COUNTRY="_country";
-	public static final String COLUMN_LAT="_lat";
-	public static final String COLUMN_LON="_lon";
-	
-	
-	public static final String TABLE_FORECAST="forecast";
-	public static final String COLUMN_ID_FORECAST="_id";
-	public static final String COLUMN_ID_OWNER="_idOwner";
-	public static final String COLUMN_DATE="_date";
-	public static final String COLUMN_MAIN_WEATHER="_mainWeather";
-	public static final String COLUMN_DESCRIPTION="_description";
-	public static final String COLUMN_PRESSURE="_pressure";
-	public static final String COLUMN_SPEED="_speed";
-	public static final String COLUMN_CLOUDS="_clouds";
-	public static final String COLUMN_HUMIDITY="_humidity";
-	public static final String COLUMN_SNOW="_snow";
-	public static final String COLUMN_RAIN="_rain";
-	
-	public static final String TABLE_TEMP="temperature";
-	public static final String COLUMN_ID_TEMPERATURE="_idTemp";
-	public static final String COLUMN_ID_OWNER_TEMP="_idOwner";
-	public static final String COLUMN_DAY ="_day";
-	public static final String COLUMN_MIN ="_min";
-	public static final String COLUMN_MAX ="_max";
-	public static final String COLUMN_NIGHT ="_night";
-	public static final String COLUMN_EVE ="_eve";
-	public static final String COLUMN_MORNING="_morning";
+	public static final String COLUMN_COUNTRY = "_country";
+	public static final String COLUMN_LAT = "_lat";
+	public static final String COLUMN_LON = "_lon";
 
+	public static final String TABLE_FORECAST = "forecast";
+	public static final String COLUMN_ID_FORECAST = "_id";
+	public static final String COLUMN_ID_OWNER = "_idOwner";
+	public static final String COLUMN_DATE = "_date";
+	public static final String COLUMN_MAIN_WEATHER = "_mainWeather";
+	public static final String COLUMN_DESCRIPTION = "_description";
+	public static final String COLUMN_PRESSURE = "_pressure";
+	public static final String COLUMN_SPEED = "_speed";
+	public static final String COLUMN_CLOUDS = "_clouds";
+	public static final String COLUMN_HUMIDITY = "_humidity";
+	public static final String COLUMN_SNOW = "_snow";
+	public static final String COLUMN_RAIN = "_rain";
+
+	public static final String TABLE_TEMP = "temperature";
+	public static final String COLUMN_ID_TEMPERATURE = "_idTemp";
+	public static final String COLUMN_ID_OWNER_TEMP = "_idOwner";
+	public static final String COLUMN_DAY = "_day";
+	public static final String COLUMN_MIN = "_min";
+	public static final String COLUMN_MAX = "_max";
+	public static final String COLUMN_NIGHT = "_night";
+	public static final String COLUMN_EVE = "_eve";
+	public static final String COLUMN_MORNING = "_morning";
 
 	private static final String DATABASE_CREATE_CITY = "create table "
 			+ TABLE_CITY + "(" + COLUMN_ID
 			+ " integer primary key autoincrement, " + COLUMN_NAME
-			+ " text not  null, "+COLUMN_COUNTRY+" text, "+COLUMN_LAT+" text, "+COLUMN_LON+" text" +");";
+			+ " text, " + COLUMN_COUNTRY + " text, " + COLUMN_LAT
+			+ " text, " + COLUMN_LON + " text" + ");";
 	private static final String DATABASE_CREATE_FORECAST = "create table "
-			+ TABLE_CITY + "(" + COLUMN_ID
-			+ " integer primary key autoincrement, " + COLUMN_NAME
-			+ " text not  null"+");";
+			+ TABLE_FORECAST + "(" + COLUMN_ID_FORECAST
+			+ " integer primary key autoincrement, " + COLUMN_ID_OWNER
+			+ " integer, " + COLUMN_DATE + " text, " + COLUMN_MAIN_WEATHER
+			+ " text, " + COLUMN_DESCRIPTION + " text, " + COLUMN_PRESSURE
+			+ " text, " + COLUMN_SPEED + " text, " + COLUMN_CLOUDS + " text, "
+			+ COLUMN_HUMIDITY + " text, " + COLUMN_SNOW + " text, "
+			+ COLUMN_RAIN + " text" + ");";
 	private static final String DATABASE_CREATE_TEMP = "create table "
-			+ TABLE_CITY + "(" + COLUMN_ID
-			+ " integer primary key autoincrement, " + COLUMN_NAME
-			+ " text not  null"+");";
+			+ TABLE_TEMP + "(" + COLUMN_ID_TEMPERATURE
+			+ " integer primary key autoincrement, " + COLUMN_ID_OWNER_TEMP
+			+ " integer, " + COLUMN_DAY + " text, " + COLUMN_MIN + " text, "
+			+ COLUMN_MAX + " text, " + COLUMN_NIGHT + " text, "
+			+ COLUMN_EVE + " text, " + COLUMN_MORNING + " text" + ");";
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		// TODO Auto-generated method stub
 		db.execSQL(DATABASE_CREATE_CITY);
-		//db.execSQL(DATABASE_CREATE_FORECAST);
-		//db.execSQL(DATABASE_CREATE_TEMP);
+		db.execSQL(DATABASE_CREATE_FORECAST);
+		db.execSQL(DATABASE_CREATE_TEMP);
 	}
 
 	@Override
@@ -79,5 +84,4 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_TEMP);
 		onCreate(db);
 	}
-
 }

@@ -3,5 +3,5 @@
 
     <string name="app_name">CharlieWeather</string>
     <string name="hello_world">Hello world!</string>
-
+	<string name="Internet_Is_Disabled">Internet jest nie dostępny</string>
 </resources>
