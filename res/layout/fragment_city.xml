@@ -13,12 +13,12 @@
         android:orientation="horizontal" >
 
         <ImageView
-            android:id="@+id/weatherImageView"
+            android:id="@+id/weatherImageViewOne"
             android:layout_gravity="left"
             android:src="@drawable/ic_launcher" />
 
         <TextView
-            android:id="@+id/temperatureView"
+            android:id="@+id/temperatureViewOne"
             android:layout_gravity="right"
             android:text="3C"
             android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -41,14 +41,14 @@
             android:orientation="vertical" >
 
             <ListView
-                android:id="@+id/weatherDetailsList"
+                android:id="@+id/weatherDetailsListOne"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" >
             </ListView>
 
             <TextView
-                android:id="@+id/weatherDescriptionView"
+                android:id="@+id/weatherDescriptionViewOne"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Medium Text"
@@ -57,7 +57,7 @@
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/imageView2One"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@android:drawable/zoom_plate" />

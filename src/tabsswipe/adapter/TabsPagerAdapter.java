@@ -1,10 +1,7 @@
 package tabsswipe.adapter;
 
 import com.example.charlieweather.City;
-import com.example.charlieweather.GamesFragment;
 import com.example.charlieweather.MainActivity;
-import com.example.charlieweather.MoviesFragment;
-import com.example.charlieweather.TopRatedFragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
