@@ -4,4 +4,18 @@
     <string name="app_name">CharlieWeather</string>
     <string name="hello_world">Hello world!</string>
 	<string name="Internet_Is_Disabled">Internet jest nie dostępny</string>
+	<string name="nameOfCity">City: </string>
+	<string name="state">State: </string>
+	<string name="weather">Weather: </string>
+	<string name="pressure">Pressure: </string>
+	<string name="max">Max: </string>
+	<string name="min">Min: </string>
+	<string name="day">Day: </string>
+	<string name="night">Night: </string>
+	<string name="celsius">Celsius</string>
+	<string name="temperatuer">TEMPERATURE</string>
+	<string name="humidity">Humidity: </string>
+	<string name="snow">Snow: </string>
+	<string name="clouds">Clouds: </string>
+	<string name="rain">Rain: </string>
 </resources>

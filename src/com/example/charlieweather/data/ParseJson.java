@@ -14,6 +14,8 @@ public class ParseJson {
 
 	public static CityInfo getListOfForecastFromString(String jsonData) {
 		CityInfo city = getCityInfo(jsonData);
+		if(city==null)
+			return null;
 		List<ForecastForOneDay> list = new ArrayList<ForecastForOneDay>();
 		try {
 			JSONObject response = new JSONObject(jsonData);
@@ -96,6 +98,9 @@ public class ParseJson {
 		CityInfo city = new CityInfo();
 		try {
 			JSONObject response = new JSONObject(jsonData);
+			if(response.has("cod"))
+				if(response.getString("cod")=="404")
+					return null;
 			if (response.has("city")) {
 				JSONObject cityInfo = response.getJSONObject("city");
 				if (cityInfo.has("name"))

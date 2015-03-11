@@ -43,7 +43,21 @@ public final class R {
     public static final class string {
         public static final int Internet_Is_Disabled=0x7f050002;
         public static final int app_name=0x7f050000;
+        public static final int celsius=0x7f05000b;
+        public static final int clouds=0x7f05000f;
+        public static final int day=0x7f050009;
         public static final int hello_world=0x7f050001;
+        public static final int humidity=0x7f05000d;
+        public static final int max=0x7f050007;
+        public static final int min=0x7f050008;
+        public static final int nameOfCity=0x7f050003;
+        public static final int night=0x7f05000a;
+        public static final int pressure=0x7f050006;
+        public static final int rain=0x7f050010;
+        public static final int snow=0x7f05000e;
+        public static final int state=0x7f050004;
+        public static final int temperatuer=0x7f05000c;
+        public static final int weather=0x7f050005;
     }
     public static final class style {
         /** 

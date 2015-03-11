@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.charlieweather.R;
+
 public class CityInfo {
 
 	private List<ForecastForOneDay> list=new ArrayList<ForecastForOneDay>();
@@ -53,6 +55,13 @@ public class CityInfo {
 		this.coords = new PointLD(lat,lon);
 		
 	}
-	
+	public String toString(){
+		String s="=================================================\n";
+		s+=Helper.context.getString(R.string.nameOfCity)+name+"\n";
+		s+=Helper.context.getString(R.string.state)+country+"\n";
+		for(int i=0;i<list.size();i++)
+			s+=list.get(i).toString()+"\n";
+		return s;
+	}
 	
 }

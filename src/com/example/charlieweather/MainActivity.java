@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.charlieweather.data.CityInfo;
 import com.example.charlieweather.data.DataBase;
+import com.example.charlieweather.data.Helper;
 import com.example.charlieweather.data.IsNetworkAvailable;
 public class MainActivity extends FragmentActivity implements TabListener {
 
@@ -43,6 +44,7 @@ public class MainActivity extends FragmentActivity implements TabListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
  
+        Helper.setContext(getApplicationContext());
         IsNetworkAvailable.context=getApplicationContext();
         dataBase=dataBase.getInstance();
         dataBase.setCords();

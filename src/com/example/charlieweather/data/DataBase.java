@@ -25,8 +25,14 @@ public class DataBase {
 		return list;
 	}
 
-	public void addNewCity(){
-		
+	public void addNewCity(String name){
+		cities.add(new PointLD(name));
+	}
+	public void addNewCity(double lat,double lon){
+		cities.add(new PointLD(lat,lon));
+	}
+	public void removeCity(int i){
+		cities.remove(i);
 	}
 	public void setList(List<CityInfo> list) {
 		this.list = list;
@@ -49,5 +55,17 @@ public class DataBase {
 		cities.add(new PointLD(49.9874932,19.7339459));
 		cities.add(new PointLD(-0.12574,51.50853));
 		cities.add(new PointLD(-0.12574,51.50853));
+	}
+	public String getAllInfoInString(){
+		String s="";
+		for(int i=0;i<list.size();i++)
+			s+=getInfoInString(i)+"\n";
+		return s;
+	}
+	public String getInfoInString(int i){
+		if(i<list.size()&& i>=0)
+			return list.get(i).toString();
+		else
+			return "";
 	}
 }

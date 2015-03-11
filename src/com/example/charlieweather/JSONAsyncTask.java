@@ -73,7 +73,11 @@ class JSONAsyncTask extends AsyncTask<String[], Void, List<CityInfo>> {
 				}
 				is.close();
 				json = sb.toString();
-				cityInfo.add(dataSource.createCityInfo(ParseJson.getListOfForecastFromString(json)));
+				CityInfo city=ParseJson.getListOfForecastFromString(json);
+				if(city!=null)
+					cityInfo.add(dataSource.createCityInfo(city));
+				else
+					db.removeCity(i);
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 				return null;

@@ -3,6 +3,8 @@ package com.example.charlieweather.data;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.example.charlieweather.R;
+
 import android.net.ParseException;
 
 public class ForecastForOneDay {
@@ -126,5 +128,21 @@ public class ForecastForOneDay {
 	}
 	public void setID_owner(Long iD_owner) {
 		ID_owner = iD_owner;
+	}
+	@Override
+	public String toString() {
+		String s="o\n";
+		s+=getDateString()+"\n";
+		s+=description+"\n";
+		s+=temperature.toString();
+		s+=Helper.context.getString(R.string.humidity)+humidity+" %";
+		s+=Helper.context.getString(R.string.pressure)+pressure+" hPa";
+		if(snow!=0)
+			s+=Helper.context.getString(R.string.snow)+snow+" mm";
+		if(rain!=0)
+			s+=Helper.context.getString(R.string.rain)+rain+" mm";
+		if(clouds!=0)
+			s+=Helper.context.getString(R.string.clouds)+clouds+" %";	
+		return s;
 	}
 }

@@ -1,5 +1,7 @@
 package com.example.charlieweather.data;
 
+import com.example.charlieweather.R;
+
 
 public class Temperature {
 
@@ -58,6 +60,16 @@ public class Temperature {
 	}
 	public void setIDOwner(Long iDOwner) {
 		IDOwner = iDOwner;
+	}
+	@Override
+	public String toString() {
+		String s="\n";
+		s+=Helper.context.getString(R.string.temperatuer)+"\n";
+		s+=Helper.context.getString(R.string.day)+day+" "+Helper.context.getString(R.string.celsius)+"\n";
+		s+=Helper.context.getString(R.string.night)+ night+" "+Helper.context.getString(R.string.celsius)+"\n";
+		s+=Helper.context.getString(R.string.max)+max+" "+Helper.context.getString(R.string.celsius)+"\n";
+		s+=Helper.context.getString(R.string.min)+min+" "+Helper.context.getString(R.string.celsius)+"\n";
+		return s;
 	}
 	
 }
