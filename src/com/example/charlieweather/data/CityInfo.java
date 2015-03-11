@@ -1,6 +1,5 @@
 package com.example.charlieweather.data;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 

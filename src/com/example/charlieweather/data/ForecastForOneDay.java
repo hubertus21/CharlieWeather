@@ -5,8 +5,6 @@ import java.util.Date;
 
 import com.example.charlieweather.R;
 
-import android.net.ParseException;
-
 public class ForecastForOneDay {
 
 	private Long ID;

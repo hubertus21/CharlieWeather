@@ -7,9 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.R.string;
-import android.util.Log;
-
 public class ParseJson {
 
 	public static CityInfo getListOfForecastFromString(String jsonData) {

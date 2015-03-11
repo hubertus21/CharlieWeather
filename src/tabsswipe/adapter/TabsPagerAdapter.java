@@ -1,11 +1,10 @@
 package tabsswipe.adapter;
 
-import com.example.charlieweather.City;
-import com.example.charlieweather.MainActivity;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.example.charlieweather.MainActivity;
  
 public class TabsPagerAdapter extends FragmentPagerAdapter {
  

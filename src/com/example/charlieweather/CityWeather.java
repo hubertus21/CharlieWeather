@@ -3,17 +3,12 @@ package com.example.charlieweather;
 import java.io.InputStream;
 import java.net.URL;
 
-import com.example.charlieweather.City.LoadImage;
-import com.example.charlieweather.data.ForecastForOneDay;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +18,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.charlieweather.data.ForecastForOneDay;
+import com.example.charlieweather.data.Helper;
 
 
 
@@ -44,7 +42,7 @@ public class CityWeather extends Activity {
 		temperatureView = (TextView)this.findViewById(R.id.temperatureViewOne);
 		weatherDescription = (TextView)findViewById(R.id.weatherDescriptionViewOne);
 		weatherDetailsList = (ListView)findViewById(R.id.weatherDetailsListOne);
-		img = (ImageView)rootView.findViewById(R.id.weatherDescriptionViewOne);
+		img = (ImageView)findViewById(R.id.weatherDescriptionViewOne);
 		forecast = City.newActivityForecast;
 		
 		String temperature = forecast.getTemperature().toString();
@@ -76,7 +74,7 @@ public class CityWeather extends Activity {
 	    @Override
 	        protected void onPreExecute() {
 	            super.onPreExecute();
-	            pDialog = new ProgressDialog(getActivity());
+	            pDialog = new ProgressDialog(Helper.context);
 	            pDialog.setMessage("Loading Image ....");
 	            pDialog.show();
 	    }
@@ -94,7 +92,7 @@ public class CityWeather extends Activity {
 	           pDialog.dismiss();
 	         }else{
 	           pDialog.dismiss();
-	           Toast.makeText(getActivity(), "Image Does Not exist or Network Error", Toast.LENGTH_SHORT).show();
+	           Toast.makeText(Helper.context, "Image Does Not exist or Network Error", Toast.LENGTH_SHORT).show();
 	         }
 	       }
 	   }

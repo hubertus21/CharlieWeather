@@ -9,15 +9,11 @@ import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.widget.Toast;
 
-import com.example.charlieweather.data.CityInfo;
 import com.example.charlieweather.data.DataBase;
 import com.example.charlieweather.data.Helper;
 import com.example.charlieweather.data.IsNetworkAvailable;

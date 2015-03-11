@@ -1,15 +1,17 @@
 package com.example.charlieweather;
 
-import android.view.View;
-
-
 import android.content.Context;
-import android.graphics.*;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Path.Direction;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.Point;
+import android.graphics.RectF;
+import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 
 public class TermometerView extends View {

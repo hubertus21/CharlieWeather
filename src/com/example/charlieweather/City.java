@@ -5,8 +5,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 
-import com.example.charlieweather.data.ForecastForOneDay;
-
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,11 +13,9 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -28,6 +25,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.charlieweather.data.ForecastForOneDay;
+
+@SuppressLint("ValidFragment")
 public class City extends Fragment {
 	
 	private List<Weather> nextDays;
@@ -60,7 +60,7 @@ public class City extends Fragment {
 		nextDaysView = (ListView)rootView.findViewById(R.id.nextDaysListView);
 		weatherDetailsList = (ListView)rootView.findViewById(R.id.weatherDetailsListOne);
 		weatherDescription = (TextView)rootView.findViewById(R.id.weatherDescriptionViewOne);
-		img = (ImageView)rootView.findViewById(R.id.weatherDescriptionViewOne);
+		img = (ImageView)rootView.findViewById(R.id.weatherImageViewOne);
 		
 		temperatureView = (TextView)rootView.findViewById(R.id.temperatureViewOne);
 	}

@@ -1,6 +1,5 @@
 package com.example.charlieweather.data;
 
-import java.math.BigDecimal;
 
 public class PointLD {
 

@@ -9,9 +9,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.charlieweather.data.CityInfo;
 import com.example.charlieweather.data.ForecastForOneDay;
-import com.example.charlieweather.data.Temperature;
 
 public class ForecastDataSource {
 
