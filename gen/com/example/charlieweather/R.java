@@ -24,6 +24,9 @@ public final class R {
         public static final int imageView2=0x7f070009;
         public static final int nextDaysListView=0x7f07000a;
         public static final int pager=0x7f070000;
+        public static final int prDialogTextView=0x7f070011;
+        public static final int prog_dialog2=0x7f07000f;
+        public static final int progressBar1=0x7f070010;
         public static final int seekBar1=0x7f070002;
         public static final int temperatureTextViewNext=0x7f07000e;
         public static final int temperatureView=0x7f070005;
@@ -41,6 +44,7 @@ public final class R {
         public static final int fragment_movies=0x7f030004;
         public static final int fragment_top_rated=0x7f030005;
         public static final int next_day_layout=0x7f030006;
+        public static final int prog_dialog2=0x7f030007;
     }
     public static final class string {
         public static final int app_name=0x7f050000;

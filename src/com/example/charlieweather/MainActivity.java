@@ -15,6 +15,9 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
@@ -33,7 +36,9 @@ public class MainActivity extends FragmentActivity implements TabListener {
     private DataBase dataBase;
 	private ProgressDialog dialog;
 	
-	
+	public void cos(){
+		Log.i("COS","COS2");
+	}
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +46,13 @@ public class MainActivity extends FragmentActivity implements TabListener {
         setContentView(R.layout.activity_main);
         final TermometerView tView =(TermometerView)findViewById(R.id.termometerView1);
         SeekBar sb = (SeekBar)findViewById(R.id.seekBar1);
+        
         sb.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 			public void onProgressChanged(SeekBar arg0, int arg1, boolean arg2) {
 				// TODO Auto-generated method stub
 				tView.setTemperature(arg1-20,arg1-20);
 				tView.invalidate();
+				
 			}
 
 			@Override
@@ -62,7 +69,8 @@ public class MainActivity extends FragmentActivity implements TabListener {
 		});
         dataBase=dataBase.getInstance();
         dataBase.setCords();
-        loadData();
+        ProgressDialog2 pr = ProgressDialog2.show(this, "Downloading");
+        //loadData();
         
         /*
         
@@ -123,7 +131,7 @@ public class MainActivity extends FragmentActivity implements TabListener {
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
-					Log.i("ASYNC_TASK","Dzia³a");
+					cos();
 				}
 			});
 	    	task.execute(dataBase.getURL());}

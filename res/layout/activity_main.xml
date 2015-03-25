@@ -16,8 +16,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignParentLeft="true"
-    android:layout_alignParentTop="true"
-    android:layout_marginTop="47dp" />
+    android:layout_below="@+id/seekBar1" />
 
 <SeekBar
     android:id="@+id/seekBar1"

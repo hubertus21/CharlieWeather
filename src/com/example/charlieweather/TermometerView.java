@@ -1,5 +1,8 @@
 package com.example.charlieweather;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.view.View;
 
 
@@ -18,6 +21,11 @@ public class TermometerView extends View {
 	private Path innerTermometerPath = new Path();
 	private Paint outerTermometerPaint = new Paint();
 	private Path outerTermometerPath = new Path();
+	private Paint scalePaint = new Paint();
+	private Path scalePath = new Path();
+	private List<String> scaleLabels = new ArrayList<String>();
+	private List<Float> scaleYs = new ArrayList<Float>();
+	private float scaleLabelsX = 0;
 	
 	private double maxTemp = 10;
 	private double minTemp = 10;
@@ -38,8 +46,31 @@ public class TermometerView extends View {
 		if(w * h != 0){
 			this.calculateInner();
 	    	this.calculateOuter();
+	    	this.calculateScale();
 			}
 	}
+    
+    protected void calculateScale(){
+    	scalePath = new Path();
+        Point termLowerCenter = new Point(this.getWidth()/2,(int) (this.getHeight() * 0.8));
+        int termRadius = (int) (this.getWidth()* 0.1);
+		scalePaint.setColor(Color.BLACK);
+		scalePaint.setAlpha(128);
+        scalePath.moveTo(0, 0);
+        scalePaint.setTextSize(16);
+        float unitHeight = (float) ((this.getHeight() * 0.6)/40);
+        scaleLabels.clear();
+        scaleYs.clear();
+        for(int i=0;i < 40;i+=5){
+            scalePath.addRoundRect(new RectF(termLowerCenter.x - (termRadius/2), (float) (termLowerCenter.y - (termRadius + unitHeight * i)), termLowerCenter.x + (termRadius/2), termLowerCenter.y - (termRadius + unitHeight * i) + 2),0,0,Direction.CCW);
+            scaleLabels.add(String.valueOf(i - 10) + " 'C");
+            scaleYs.add((termLowerCenter.y - (termRadius + unitHeight * i)));
+        }
+        scaleLabelsX = termLowerCenter.x + (termRadius/2);
+        
+       //scalePath.addRoundRect(new RectF(termLowerCenter.x - (termRadius/2), (float) (termLowerCenter.y - this.calculateInnerLength()), termLowerCenter.x + (termRadius/2), termLowerCenter.y),20,20,Direction.CCW);
+    
+    }
     
     protected void calculateInner(){
     	innerTermometerPath = new Path();
@@ -134,7 +165,7 @@ public class TermometerView extends View {
     		return Color.rgb(0,0,225);
 
     	avgTemp -= 10;
-    	int redColor = (int) (((225/20) * avgTemp) );
+    	int redColor = (int) (((225/20) * avgTemp));
     	redColor = trimColor(redColor,225);
     	
     	int greenColor= (int) (225 - Math.abs((225/20) * avgTemp));
@@ -150,6 +181,10 @@ public class TermometerView extends View {
     protected void onDraw(Canvas canvas) {
     	canvas.drawPath(innerTermometerPath,innerTermometerPaint);
     	canvas.drawPath(outerTermometerPath,outerTermometerPaint);
+    	canvas.drawPath(scalePath, scalePaint);
+    	for(int i=0;i < scaleLabels.size();i++){
+    		canvas.drawText(scaleLabels.get(i), scaleLabelsX, scaleYs.get(i), scalePaint);
+    	}
         super.onDraw(canvas);
 
     }
