@@ -14,22 +14,38 @@ public final class R {
         public static final int grey=0x7f040000;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
+        public static final int add=0x7f020000;
+        public static final int i01d=0x7f020001;
+        public static final int i02d=0x7f020002;
+        public static final int i03d=0x7f020003;
+        public static final int i04d=0x7f020004;
+        public static final int i09d=0x7f020005;
+        public static final int i10d=0x7f020006;
+        public static final int i11d=0x7f020007;
+        public static final int i13d=0x7f020008;
+        public static final int i50d=0x7f020009;
+        public static final int ic_launcher=0x7f02000a;
+        public static final int mail=0x7f02000b;
+        public static final int refresh=0x7f02000c;
     }
     public static final class id {
-        public static final int GridLayout1=0x7f070001;
-        public static final int LinearLayout1=0x7f070004;
-        public static final int dateTextViewNext=0x7f07000a;
-        public static final int dayTextViewNext=0x7f070009;
-        public static final int imageView2One=0x7f070007;
-        public static final int nextDaysListView=0x7f070008;
-        public static final int pager=0x7f070000;
-        public static final int temperatureTextViewNext=0x7f07000c;
-        public static final int temperatureViewOne=0x7f070003;
-        public static final int weatherDescriptionViewOne=0x7f070006;
-        public static final int weatherDetailsListOne=0x7f070005;
-        public static final int weatherImageViewNext=0x7f07000b;
-        public static final int weatherImageViewOne=0x7f070002;
+        public static final int GridLayout1=0x7f080001;
+        public static final int LinearLayout1=0x7f080004;
+        public static final int add_city=0x7f08000e;
+        public static final int dateTextViewNext=0x7f08000b;
+        public static final int dayTextViewNext=0x7f08000a;
+        public static final int imageView2One=0x7f080007;
+        public static final int nextDaysListView=0x7f080008;
+        public static final int pager=0x7f080000;
+        public static final int refresh=0x7f08000f;
+        public static final int send_email=0x7f080010;
+        public static final int temperatureTextViewNext=0x7f08000d;
+        public static final int temperatureViewOne=0x7f080003;
+        public static final int termometerView1=0x7f080009;
+        public static final int weatherDescriptionViewOne=0x7f080006;
+        public static final int weatherDetailsListOne=0x7f080005;
+        public static final int weatherImageViewNext=0x7f08000c;
+        public static final int weatherImageViewOne=0x7f080002;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -40,12 +56,19 @@ public final class R {
         public static final int fragment_top_rated=0x7f030005;
         public static final int next_day_layout=0x7f030006;
     }
+    public static final class menu {
+        public static final int game_menu=0x7f070000;
+    }
     public static final class string {
         public static final int Internet_Is_Disabled=0x7f050002;
+        public static final int addCity=0x7f050011;
         public static final int app_name=0x7f050000;
+        public static final int cancel=0x7f050017;
         public static final int celsius=0x7f05000b;
         public static final int clouds=0x7f05000f;
+        public static final int confirm=0x7f050016;
         public static final int day=0x7f050009;
+        public static final int enter_city=0x7f050014;
         public static final int hello_world=0x7f050001;
         public static final int humidity=0x7f05000d;
         public static final int max=0x7f050007;
@@ -54,10 +77,13 @@ public final class R {
         public static final int night=0x7f05000a;
         public static final int pressure=0x7f050006;
         public static final int rain=0x7f050010;
+        public static final int refresh=0x7f050012;
+        public static final int send_email=0x7f050013;
         public static final int snow=0x7f05000e;
         public static final int state=0x7f050004;
         public static final int temperatuer=0x7f05000c;
         public static final int weather=0x7f050005;
+        public static final int word_too_short=0x7f050015;
     }
     public static final class style {
         /** 

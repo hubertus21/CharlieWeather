@@ -18,7 +18,7 @@ public class ForecastForOneDay {
 	private double speed=0;
 	private double deg=0;
 	private int clouds=0;
-	private int humidity=0;
+	private int humidity=-1;
 	private double snow=0;
 	private double rain=0;
 	
@@ -129,18 +129,19 @@ public class ForecastForOneDay {
 	}
 	@Override
 	public String toString() {
-		String s="o\n";
+		String s="\n";
 		s+=getDateString()+"\n";
 		s+=description+"\n";
 		s+=temperature.toString();
-		s+=Helper.context.getString(R.string.humidity)+humidity+" %";
-		s+=Helper.context.getString(R.string.pressure)+pressure+" hPa";
+		if(humidity!=-1)
+			s+=Helper.context.getString(R.string.humidity)+humidity+" %\n";
+		s+=Helper.context.getString(R.string.pressure)+pressure+" hPa\n";
 		if(snow!=0)
-			s+=Helper.context.getString(R.string.snow)+snow+" mm";
+			s+=Helper.context.getString(R.string.snow)+snow+" mm\n";
 		if(rain!=0)
-			s+=Helper.context.getString(R.string.rain)+rain+" mm";
+			s+=Helper.context.getString(R.string.rain)+rain+" mm\n";
 		if(clouds!=0)
-			s+=Helper.context.getString(R.string.clouds)+clouds+" %";	
+			s+=Helper.context.getString(R.string.clouds)+clouds+" %\n";	
 		return s;
 	}
 }
