@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.widget.Toast;
 
+import com.example.charlieweather.data.CityInfo;
 import com.example.charlieweather.data.DataBase;
 import com.example.charlieweather.data.Helper;
 import com.example.charlieweather.data.IsNetworkAvailable;
@@ -25,7 +26,7 @@ public class MainActivity extends FragmentActivity implements TabListener {
     public static List<City> cities;
     //public static List<CityInfo> citiesInfo;
     // Tab titles
-    private String[] tabs = { "Kraków", "Nowy Jork", "Szikago", "Tokyo", "Smoleñsk" };
+    //private String[] tabs = { "Kraków", "Nowy Jork", "Szikago", "Tokyo", "Smoleñsk" };
  
     
     
@@ -46,13 +47,22 @@ public class MainActivity extends FragmentActivity implements TabListener {
         dataBase.setCords();
         dataSource=new CityDataSource(this);
 		dataSource.open();
-		if(dataBase.getList().isEmpty())
-			loadData();
-        
-        
-        
-        // Initilization
-        viewPager = (ViewPager) findViewById(R.id.pager);
+      
+        if(dataBase.getList().isEmpty())
+			loadData();      
+}
+
+	private void setup() {
+		cities = new ArrayList<City>();
+		for(int i=0;i<dataBase.getList().size();i++){
+			//tabs[i] = Integer.toString(dataBase.getList().size());
+			cities.add(new City(dataBase.getList().get(i).getName(),dataBase.getList().get(i).getList()));
+		}
+		//Toast.makeText(getApplicationContext(), String.valueOf(cities.size()) , Toast.LENGTH_SHORT).show();
+	}
+	
+	private void init(){
+		viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getActionBar();
         mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
  
@@ -61,12 +71,11 @@ public class MainActivity extends FragmentActivity implements TabListener {
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);        
  
         // Adding Tabs
-        for (String tab_name : tabs) {
-            actionBar.addTab(actionBar.newTab().setText(tab_name)
+        for (CityInfo city : dataBase.getList()) {
+            actionBar.addTab(actionBar.newTab().setText(city.getCountry())
                     .setTabListener(this));
         }
         setup();
-        
         viewPager.setOnPageChangeListener(
                 new ViewPager.SimpleOnPageChangeListener() {
                     @Override
@@ -75,22 +84,17 @@ public class MainActivity extends FragmentActivity implements TabListener {
                       actionBar.setSelectedNavigationItem(position);              
                       }
                 });
-}
-
-	private void setup() {
-		cities = new ArrayList<City>();
-		for(int i=0;i<5;i++){
-			//tabs[i] = Integer.toString(dataBase.getList().size());
-			cities.add(new City(tabs[i]));
-		}
 	}
+
 
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
 		// TODO Auto-generated method stub
-		for(int i=0;i<5;i++){
+		/*for(int i=0;i<5;i++){
 			tabs[i] = tabs[i]+1;
 		}
+		*/
+
 	}
 
 	@Override
@@ -102,13 +106,13 @@ public class MainActivity extends FragmentActivity implements TabListener {
 	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
 		// TODO Auto-generated method stub
-		
 	}
 	private void loadData(){
 	    	if(IsNetworkAvailable.isNetworkAvailable()){
 	    		if(dataSource.checkDate())
 	    		{
 	    			dataBase.setList(dataSource.getAllInfo());
+	    			init();
 	    		}
 	    		else{
 	    		dialog=ProgressDialog.show(this,"","Downloading json...");
@@ -117,11 +121,17 @@ public class MainActivity extends FragmentActivity implements TabListener {
 					@Override
 					public void run() {
 						
+						init();
 					}
+
+					
 				});
 	    		task.execute(dataBase.getURL());
 	    		}}else
+	    		{
 	    			dataBase.setList(dataSource.getAllInfo());
+	    			init();
+	    		}
 	}
 	private void refreshData(){
 		if(IsNetworkAvailable.isNetworkAvailable()){
@@ -137,6 +147,7 @@ public class MainActivity extends FragmentActivity implements TabListener {
 		}else
 			Toast.makeText(getApplicationContext(),getResources().getText(R.string.Internet_Is_Disabled),Toast.LENGTH_LONG).show();
 	}
+	
 	
 }
 	
