@@ -41,14 +41,14 @@
             android:orientation="vertical" >
 
             <ListView
-                android:id="@+id/weatherDetailsListOne"
+                android:id="@+id/weatherDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" >
             </ListView>
 
             <TextView
-                android:id="@+id/weatherDescriptionViewOne"
+                android:id="@+id/weatherDetailsList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Medium Text"

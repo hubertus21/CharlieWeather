@@ -31,18 +31,26 @@ public class CityWeather extends Activity {
 	private TextView weatherDescription;
 	private ListView weatherDetailsList;
 	
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	public void onCeate(Bundle savedInstanceState){
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.fragment_city_weather);
+		setup();
+	}
+	/*
+	public void onCreateView(LayoutInflater inflater, ViewGroup container,
 	        Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_city_weather, container,false);
+		//View rootView = inflater.inflate(R.layout.fragment_city_weather, container,false);
+		setContentView(R.layout.activity_main);
 				setup();
-				return rootView;
+				//return rootView;
 	    }
+	    */
 
 	private void setup() {
 		temperatureView = (TextView)this.findViewById(R.id.temperatureViewOne);
-		weatherDescription = (TextView)findViewById(R.id.weatherDescriptionViewOne);
-		weatherDetailsList = (ListView)findViewById(R.id.weatherDetailsListOne);
-		img = (ImageView)findViewById(R.id.weatherDescriptionViewOne);
+		weatherDescription = (TextView)findViewById(R.id.weatherDetailsList);
+		weatherDetailsList = (ListView)findViewById(R.id.weatherDescription);
+		img = (ImageView)findViewById(R.id.weatherDetailsList);
 		forecast = City.newActivityForecast;
 		
 		String temperature = forecast.getTemperature().toString();

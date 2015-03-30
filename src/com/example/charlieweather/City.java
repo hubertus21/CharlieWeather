@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.charlieweather.data.ForecastForOneDay;
+import com.example.charlieweather.CityWeather;
 
 @SuppressLint("ValidFragment")
 public class City extends Fragment {
@@ -37,6 +38,7 @@ public class City extends Fragment {
 	ListView weatherDetailsList;
 	TextView weatherDescription;
 	TextView temperatureView;
+	TermometerView termometerView;
 	private List<ForecastForOneDay> forecast;
 	public static ForecastForOneDay newActivityForecast;
 	
@@ -63,13 +65,14 @@ public class City extends Fragment {
 		
 		nextDaysView = (ListView)rootView.findViewById(R.id.nextDaysListView);
 		weatherDetailsList = (ListView)rootView.findViewById(R.id.weatherDetailsListOne);
-		weatherDescription = (TextView)rootView.findViewById(R.id.weatherDescriptionViewOne);
+		weatherDescription = (TextView)rootView.findViewById(R.id.weatherDescription);
 		img = (ImageView)rootView.findViewById(R.id.weatherImageViewOne);
+		termometerView = (TermometerView)rootView.findViewById(R.id.termometerView1);
 		
 		temperatureView = (TextView)rootView.findViewById(R.id.temperatureViewOne);
-		Toast.makeText(rootView.getContext(), temperatureView.getText() , Toast.LENGTH_SHORT).show();
-		temperatureView.setText("TEST");
-		Toast.makeText(rootView.getContext(), temperatureView.getText() , Toast.LENGTH_SHORT).show();
+		//Toast.makeText(rootView.getContext(), temperatureView.getText() , Toast.LENGTH_SHORT).show();
+		//temperatureView.setText("TEST");
+		//Toast.makeText(rootView.getContext(), temperatureView.getText() , Toast.LENGTH_SHORT).show();
 		//temperatureView.invalidate();
 		
 	}
@@ -79,12 +82,14 @@ public class City extends Fragment {
 		String temperature = forecast.get(0).getTemperature().toString();
 		
 		temperatureView.setText(temperature);
+		termometerView.setTemperature((int)forecast.get(0).getTemperature().getMax(), (int)forecast.get(0).getTemperature().getMin());
+		
 		String[] values = new String[forecast.size()];
 		
 		setDetails(forecast.get(0));
 		weatherDescription.setText(forecast.get(0).getDescription().toString());
 		
-		new LoadImage().execute(forecast.get(0).getImageUrl());
+		//new LoadImage().execute(forecast.get(0).getImageUrl());
 		
 		for(int i=0;i<forecast.size();i++){
 			values[i] = forecast.get(i).getDateString()+ "\t" + forecast.get(i).getTemperature().getDay();
@@ -94,8 +99,9 @@ public class City extends Fragment {
 	    nextDaysView.setOnItemClickListener(new OnItemClickListener() {
 	        public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
 	        	newActivityForecast = forecast.get(position);
-	        	Intent myIntent = new Intent(getActivity(), CityWeather.class);
-	        	getActivity().startActivity(myIntent);
+	        	//Intent myIntent = new Intent(getActivity(), OneDayActivity.class);
+	        	//rootView.getContext().startActivity(myIntent);
+	        	//startActivity(myIntent);
 	        }
 	    });
 	    
@@ -103,13 +109,18 @@ public class City extends Fragment {
 	private void setDetails(ForecastForOneDay forecast) {
 		String[] values = new String[5];
 		values[0] = "Deszcz: "+Double.toString(forecast.getRain())+" mm";
-		values[0] = "Œnieg: "+Double.toString(forecast.getSnow())+" mm";
+		values[1] = "Œnieg: "+Double.toString(forecast.getSnow())+" mm";
 		values[2] = "Wiatr: "+Double.toString(forecast.getSpeed()) +" km/h";
 		values[3] = "Wilgotnoœæ: "+Integer.toString(forecast.getHumidity())+" %";
 		values[4] = "Æiœnienie : "+Double.toString(forecast.getPressure())+" hPa";
 		
-		//ArrayAdapter<String> adapter = new ArrayAdapter<String>(rootView.getContext(),android.R.layout.simple_list_item_1, android.R.id.text1, values);
-        //rweatherDetailsList.setAdapter(adapter);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(rootView.getContext(),android.R.layout.simple_list_item_1, android.R.id.text1, values);
+        
+		if(weatherDetailsList==null){
+			Toast.makeText(getActivity(), "Image Does Not exist or Network Error", Toast.LENGTH_SHORT).show();
+		}
+		
+		weatherDetailsList.setAdapter(adapter);
 	}
 	
 	

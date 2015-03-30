@@ -19,16 +19,19 @@ public final class R {
     public static final class id {
         public static final int GridLayout1=0x7f070001;
         public static final int LinearLayout1=0x7f070004;
-        public static final int dateTextViewNext=0x7f07000a;
-        public static final int dayTextViewNext=0x7f070009;
-        public static final int imageView2One=0x7f070007;
+        public static final int dateTextViewNext=0x7f07000c;
+        public static final int dayTextViewNext=0x7f07000b;
+        public static final int imageView2One=0x7f07000a;
         public static final int nextDaysListView=0x7f070008;
         public static final int pager=0x7f070000;
-        public static final int temperatureTextViewNext=0x7f07000c;
+        public static final int temperatureTextViewNext=0x7f07000e;
         public static final int temperatureViewOne=0x7f070003;
-        public static final int weatherDescriptionViewOne=0x7f070006;
-        public static final int weatherDetailsListOne=0x7f070005;
-        public static final int weatherImageViewNext=0x7f07000b;
+        public static final int termometerView1=0x7f070007;
+        public static final int textView1=0x7f07000f;
+        public static final int weatherDescription=0x7f070005;
+        public static final int weatherDetailsList=0x7f070009;
+        public static final int weatherDetailsListOne=0x7f070006;
+        public static final int weatherImageViewNext=0x7f07000d;
         public static final int weatherImageViewOne=0x7f070002;
     }
     public static final class layout {
@@ -39,6 +42,7 @@ public final class R {
         public static final int fragment_movies=0x7f030004;
         public static final int fragment_top_rated=0x7f030005;
         public static final int next_day_layout=0x7f030006;
+        public static final int one_day_activity=0x7f030007;
     }
     public static final class string {
         public static final int Internet_Is_Disabled=0x7f050002;
