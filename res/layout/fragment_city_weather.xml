@@ -56,11 +56,11 @@
 
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageView2One"
+        <com.example.charlieweather.TermometerView
+            android:id="@+id/termometerView1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/zoom_plate" />
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
 </LinearLayout>

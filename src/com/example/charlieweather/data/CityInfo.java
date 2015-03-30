@@ -56,8 +56,7 @@ public class CityInfo {
 	}
 	public String toString(){
 		String s="=================================================\n";
-		s+=Helper.context.getString(R.string.nameOfCity)+name+"\n";
-		s+=Helper.context.getString(R.string.state)+country+"\n";
+		s+=Helper.context.getString(R.string.nameOfCity)+country+"\n";
 		for(int i=0;i<list.size();i++)
 			s+=list.get(i).toString()+"\n";
 		return s;
