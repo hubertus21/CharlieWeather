@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="120dp"
+    android:id="@+id/prog_dialog2"
+    android:orientation="horizontal" >
+
+    <com.example.charlieweather.ProgressBar2
+        android:id="@+id/progressBar1"
+		android:layout_width="120dp"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/prDialogTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingRight="15dp"
+        android:text="TextView" />
+
+</LinearLayout>
