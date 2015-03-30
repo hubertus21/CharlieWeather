@@ -12,7 +12,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -99,11 +100,15 @@ public class City extends Fragment {
 	    nextDaysView.setOnItemClickListener(new OnItemClickListener() {
 	        public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
 	        	newActivityForecast = forecast.get(position);
-	        	//Intent myIntent = new Intent(getActivity(), OneDayActivity.class);
+	        	Intent myIntent = new Intent(getActivity(), OneDayActivity.class);
 	        	//rootView.getContext().startActivity(myIntent);
-	        	//startActivity(myIntent);
+	        	startActivity(myIntent);
+	        	
+	        	
 	        }
 	    });
+	    
+	    
 	    
 	}
 	private void setDetails(ForecastForOneDay forecast) {
@@ -122,6 +127,15 @@ public class City extends Fragment {
 		
 		weatherDetailsList.setAdapter(adapter);
 	}
+	
+	private void showEditDialog() {
+		EditNameDialog edit = EditNameDialog.newInstance();
+        FragmentManager fm = );
+        EditNameDialog editNameDialog = new EditNameDialog();
+        this.getFragmentManager().beginTransaction().replace(R.i, nextFrag,TAG_FRAGMENT).addToBackStack(null).commit();
+        editNameDialog.show(fm, "fragment_edit_name");
+    }
+
 	
 	
 	//Class LoadImage
