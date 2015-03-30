@@ -4,14 +4,16 @@
   <item android:id="@+id/add_city"
           android:title="@string/addCity"
           android:icon="@drawable/add"
-           android:showAsAction="always"
+          android:menuCategory="container"
           />
     <item android:id="@+id/refresh"
           android:icon="@drawable/refresh"
-          android:title="@string/refresh" 
-           android:showAsAction="always"/>
+          android:title="@string/refresh"
+          android:menuCategory="container" 
+          />
     <item android:id="@+id/send_email"
           android:icon="@drawable/mail"
           android:title="@string/send_email"
-           android:showAsAction="collapseActionView" />
+          android:menuCategory="container" 
+           />
 </menu>

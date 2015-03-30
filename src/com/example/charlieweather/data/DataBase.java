@@ -5,13 +5,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import SQL.CityDataSource;
+
 public class DataBase {
 	private static DataBase instance = null;
 	private List<CityInfo> list = new ArrayList<CityInfo>();
 	private List<PointLD> cities = new ArrayList<PointLD>();
 	private Date date;
 	public DataBase() {
-
 	}
 
 	public static DataBase getInstance() {
@@ -49,12 +50,18 @@ public class DataBase {
 		return urls;
 	}
 	
-	public void setCords(){
+	public void setCords(CityDataSource dataSource){
+		List<CityInfo> l= dataSource.getAllInfo();
+		cities.clear();
+		if(l.size()>0){
+			for(int i=0;i<l.size();i++)
+				cities.add(new PointLD(l.get(i).getCountry()));
+		}else{
 		cities.add(new PointLD("Kraków"));
-		cities.add(new PointLD(50.0467657,20.0048731));
-		cities.add(new PointLD(49.9874932,19.7339459));
-		cities.add(new PointLD(-0.12574,51.50853));
-		cities.add(new PointLD(-0.12574,51.50853));
+		cities.add(new PointLD("Warszawa"));
+		cities.add(new PointLD("Berlin"));
+		cities.add(new PointLD("London"));
+		cities.add(new PointLD(-0.12574,51.50853));}
 	}
 	public String getAllInfoInString(){
 		String s="";

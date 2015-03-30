@@ -49,10 +49,10 @@ public class MainActivity extends FragmentActivity implements TabListener {
  
         Helper.setContext(this);
         IsNetworkAvailable.context=getApplicationContext();
-        dataBase=dataBase.getInstance();
-        dataBase.setCords();
         dataSource=new CityDataSource(this);
 		dataSource.open();
+		dataBase=dataBase.getInstance();
+		dataBase.setCords(dataSource);
 		if(dataBase.getList().isEmpty())
 			loadData();
         
@@ -181,10 +181,17 @@ public class MainActivity extends FragmentActivity implements TabListener {
 	    				alertDialog.show();	
 	            return true;
 	        case R.id.refresh:
-	            refreshData();
+	        	if(IsNetworkAvailable.isNetworkAvailable())
+		            refreshData();
+	        	else
+	        		Toast.makeText(this,getResources().getText(R.string.Internet_Is_Disabled),Toast.LENGTH_LONG).show();
+
 	            return true;
 	        case R.id.send_email:
-	        	EmailService.sendMail(dataBase.getInfoInString(viewPager.getCurrentItem()));
+	        	if(IsNetworkAvailable.isNetworkAvailable())
+	        		EmailService.sendMail(dataBase.getInfoInString(viewPager.getCurrentItem()));
+	        	else
+	        		Toast.makeText(this,getResources().getText(R.string.Internet_Is_Disabled),Toast.LENGTH_LONG).show();
 	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
