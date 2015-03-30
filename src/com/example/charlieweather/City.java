@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.example.charlieweather.data.ForecastForOneDay;
 import com.example.charlieweather.CityWeather;
+import com.example.charlieweather.TermometerView;
 
 @SuppressLint("ValidFragment")
 public class City extends Fragment {

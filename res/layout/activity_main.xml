@@ -11,19 +11,5 @@
     android:layout_height="match_parent">
 </android.support.v4.view.ViewPager>
 
-<com.example.charlieweather.TermometerView
-    android:id="@+id/termometerView1"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentLeft="true"
-    android:layout_below="@+id/seekBar1" />
 
-<SeekBar
-    android:id="@+id/seekBar1"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentTop="true"
-    android:max="60" />
-    
 </RelativeLayout>

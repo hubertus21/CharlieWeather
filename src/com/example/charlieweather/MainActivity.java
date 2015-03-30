@@ -38,7 +38,7 @@ public class MainActivity extends FragmentActivity implements TabListener {
     
     
     private DataBase dataBase;
-	private ProgressDialog dialog;
+	private ProgressDialog2 dialog;
 	private CityDataSource dataSource;
 	
 	
@@ -50,9 +50,10 @@ public class MainActivity extends FragmentActivity implements TabListener {
  
         Helper.setContext(this);
         IsNetworkAvailable.context=getApplicationContext();
+        dataBase = dataBase.getInstance();
         dataSource=new CityDataSource(this);
 		dataSource.open();
-      
+		dataBase.setCords(dataSource);
         if(dataBase.getList().isEmpty())
 			loadData();      
 }
@@ -120,7 +121,7 @@ public class MainActivity extends FragmentActivity implements TabListener {
 	    			init();
 	    		}
 	    		else{
-	    		dialog=ProgressDialog.show(this,"","Downloading json...");
+	    		dialog=ProgressDialog2.show(this,"Downloading json...");
 	    		JSONAsyncTask task=new JSONAsyncTask(dataBase,dialog,dataSource, new Runnable() {
 					
 					@Override
@@ -140,7 +141,7 @@ public class MainActivity extends FragmentActivity implements TabListener {
 	}
 	private void refreshData(){
 		if(IsNetworkAvailable.isNetworkAvailable()){
-			dialog=ProgressDialog.show(this,"","Downloading json...");
+			dialog=ProgressDialog2.show(this,"Downloading json...");
     		JSONAsyncTask task=new JSONAsyncTask(dataBase,dialog,dataSource,new Runnable() {
 				
 				@Override

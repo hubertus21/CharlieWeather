@@ -24,7 +24,7 @@ import com.example.charlieweather.data.ParseJson;
 class JSONAsyncTask extends AsyncTask<String[], Void, List<CityInfo>> {
 
 	private DataBase db;
-	private ProgressDialog dialog;
+	private ProgressDialog2 dialog;
 	private CityDataSource dataSource;
 	private Runnable runnable;
 
@@ -33,7 +33,7 @@ class JSONAsyncTask extends AsyncTask<String[], Void, List<CityInfo>> {
 		runnable=r;
 	}
 
-	public JSONAsyncTask(DataBase dataBase, ProgressDialog dialog, CityDataSource dataSource,Runnable r) {
+	public JSONAsyncTask(DataBase dataBase, ProgressDialog2 dialog, CityDataSource dataSource,Runnable r) {
 		db = dataBase;
 		this.dialog = dialog;
 		this.dataSource=dataSource;
