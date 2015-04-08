@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.charlieweather.data.ForecastForOneDay;
+import com.example.charlieweather.data.Helper;
 import com.example.charlieweather.CityWeather;
 import com.example.charlieweather.TermometerView;
 
@@ -36,9 +37,10 @@ public class City extends Fragment {
 	private String name;
 	private View rootView;
 	ListView nextDaysView;
-	ListView weatherDetailsList;
+	TextView weatherDetailsList;
 	TextView weatherDescription;
-	TextView temperatureView;
+	TextView dateView;
+	ImageView imageImg;
 	TermometerView termometerView;
 	private List<ForecastForOneDay> forecast;
 	public static ForecastForOneDay newActivityForecast;
@@ -65,32 +67,25 @@ public class City extends Fragment {
 	private void setup() {
 		
 		nextDaysView = (ListView)rootView.findViewById(R.id.nextDaysListView);
-		weatherDetailsList = (ListView)rootView.findViewById(R.id.weatherDetailsListOne);
-		weatherDescription = (TextView)rootView.findViewById(R.id.weatherDescription);
-		img = (ImageView)rootView.findViewById(R.id.weatherImageViewOne);
+		weatherDetailsList = (TextView)rootView.findViewById(R.id.weatherDetailsListOne);
+		weatherDescription = (TextView)rootView.findViewById(R.id.weatherDescriptionOnly);
+		imageImg = (ImageView)rootView.findViewById(R.id.weatherImageViewOnly);
 		termometerView = (TermometerView)rootView.findViewById(R.id.termometerView1);
-		
-		temperatureView = (TextView)rootView.findViewById(R.id.temperatureViewOne);
-		//Toast.makeText(rootView.getContext(), temperatureView.getText() , Toast.LENGTH_SHORT).show();
-		//temperatureView.setText("TEST");
-		//Toast.makeText(rootView.getContext(), temperatureView.getText() , Toast.LENGTH_SHORT).show();
-		//temperatureView.invalidate();
+		dateView=(TextView)rootView.findViewById(R.id.Date);
 		
 	}
 	
 	public void setValues(){
-		//setup();
-		String temperature = forecast.get(0).getTemperature().toString();
-		
-		temperatureView.setText(temperature);
-		termometerView.setTemperature((int)forecast.get(0).getTemperature().getMax(), (int)forecast.get(0).getTemperature().getMin());
-		
+		termometerView.setTemperature(forecast.get(0).getTemperature().getMax(),forecast.get(0).getTemperature().getMin());
 		String[] values = new String[forecast.size()];
-		
+		String imgName = "i"+forecast.get(0).getImageUrl();
+        imageImg.setImageResource(getResources().getIdentifier(imgName, "drawable", getActivity().getPackageName()));
+        
+
+        
 		setDetails(forecast.get(0));
 		weatherDescription.setText(forecast.get(0).getDescription().toString());
 		
-		//new LoadImage().execute(forecast.get(0).getImageUrl());
 		
 		for(int i=0;i<forecast.size();i++){
 			values[i] = forecast.get(i).getDateString()+ "\t" + forecast.get(i).getTemperature().getDay();
@@ -100,59 +95,26 @@ public class City extends Fragment {
 	    nextDaysView.setOnItemClickListener(new OnItemClickListener() {
 	        public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
 	        	newActivityForecast = forecast.get(position);
-	        	//Intent myIntent = new Intent(getActivity(), OneDayActivity.class);
+	        	Intent myIntent = new Intent(getActivity(), OnlyOne.class);
 	        	//rootView.getContext().startActivity(myIntent);
-	        	//startActivity(myIntent);
+	        	startActivity(myIntent);
 	        }
 	    });
 	    
 	}
 	private void setDetails(ForecastForOneDay forecast) {
-		String[] values = new String[5];
-		values[0] = "Deszcz: "+Double.toString(forecast.getRain())+" mm";
-		values[1] = "Œnieg: "+Double.toString(forecast.getSnow())+" mm";
-		values[2] = "Wiatr: "+Double.toString(forecast.getSpeed()) +" km/h";
-		values[3] = "Wilgotnoœæ: "+Integer.toString(forecast.getHumidity())+" %";
-		values[4] = "Æiœnienie : "+Double.toString(forecast.getPressure())+" hPa";
-		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(rootView.getContext(),android.R.layout.simple_list_item_1, android.R.id.text1, values);
-        
-		if(weatherDetailsList==null){
-			Toast.makeText(getActivity(), "Image Does Not exist or Network Error", Toast.LENGTH_SHORT).show();
-		}
-		
-		weatherDetailsList.setAdapter(adapter);
+		dateView.setText(forecast.getDateString());
+		String values = "";
+		values += "Deszcz: "+Double.toString(forecast.getRain())+" mm\n";
+		values += "Œnieg: "+Double.toString(forecast.getSnow())+" mm\n";
+		values += "Wiatr: "+Double.toString(forecast.getSpeed()) +" km/h\n";
+		values += "Wilgotnoœæ: "+Integer.toString(forecast.getHumidity())+" %\n";
+		values += "Æiœnienie : "+Double.toString(forecast.getPressure())+" hPa\n";
+		weatherDetailsList.setText(values);
 	}
 	
 	
-	//Class LoadImage
 	
-	private class LoadImage extends AsyncTask<String, String, Bitmap> {
-	    @Override
-	        protected void onPreExecute() {
-	            super.onPreExecute();
-	            pDialog = new ProgressDialog(getActivity());
-	            pDialog.setMessage("Loading Image ....");
-	            pDialog.show();
-	    }
-	       protected Bitmap doInBackground(String... args) {
-	         try {
-	               bitmap = BitmapFactory.decodeStream((InputStream)new URL(args[0]).getContent());
-	        } catch (Exception e) {
-	              e.printStackTrace();
-	        }
-	      return bitmap;
-	       }
-	       protected void onPostExecute(Bitmap image) {
-	         if(image != null){
-	           img.setImageBitmap(image);
-	           pDialog.dismiss();
-	         }else{
-	           pDialog.dismiss();
-	           Toast.makeText(getActivity(), "Image Does Not exist or Network Error", Toast.LENGTH_SHORT).show();
-	         }
-	       }
-	   }
 	Button load_img;
 	  ImageView img;
 	  Bitmap bitmap;

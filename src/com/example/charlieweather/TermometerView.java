@@ -100,7 +100,7 @@ public class TermometerView extends View {
         outerTermometerPath.addRoundRect(new RectF(termLowerCenter.x - (termRadius/2), (float) (termLowerCenter.y - (this.getHeight() * 0.7)), termLowerCenter.x + (termRadius/2), termLowerCenter.y),20,20,Direction.CCW);
     }
     
-    public void setTemperature(int maxTemp, int minTemp){
+    public void setTemperature(double maxTemp,double minTemp){
     	this.maxTemp = maxTemp;
     	this.minTemp = minTemp;
     	this.calculateInner();

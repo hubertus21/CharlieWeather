@@ -10,7 +10,7 @@ public class ForecastForOneDay {
 	private Long ID;
 	private Long ID_owner;
 	private Date date=new Date();
-	private String imageUrl;
+	private String imageUrl="";
 	private Temperature temperature=new Temperature();
 	private String mainWheater="";
 	private String description="";

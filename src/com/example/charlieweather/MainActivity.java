@@ -146,7 +146,7 @@ public class MainActivity extends FragmentActivity implements TabListener {
 				
 				@Override
 				public void run() {
-					
+					//PO ODŒWIERZENIU
 				}
 			});
     		task.execute(dataBase.getURL());

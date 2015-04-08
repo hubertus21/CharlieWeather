@@ -34,6 +34,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 	public static final String COLUMN_HUMIDITY = "_humidity";
 	public static final String COLUMN_SNOW = "_snow";
 	public static final String COLUMN_RAIN = "_rain";
+	public static final String COLUMN_ICON = "_icon";
 
 	public static final String TABLE_TEMP = "temperature";
 	public static final String COLUMN_ID_TEMPERATURE = "_idTemp";
@@ -57,7 +58,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 			+ " text, " + COLUMN_DESCRIPTION + " text, " + COLUMN_PRESSURE
 			+ " text, " + COLUMN_SPEED + " text, " + COLUMN_CLOUDS + " text, "
 			+ COLUMN_HUMIDITY + " text, " + COLUMN_SNOW + " text, "
-			+ COLUMN_RAIN + " text" + ");";
+			+ COLUMN_RAIN + " text, " + COLUMN_ICON + " text"+");";
 	private static final String DATABASE_CREATE_TEMP = "create table "
 			+ TABLE_TEMP + "(" + COLUMN_ID_TEMPERATURE
 			+ " integer primary key autoincrement, " + COLUMN_ID_OWNER_TEMP

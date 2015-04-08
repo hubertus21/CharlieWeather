@@ -1,66 +1,49 @@
 package com.example.charlieweather;
 
-import java.io.InputStream;
-import java.net.URL;
+import com.example.charlieweather.data.ForecastForOneDay;
+import com.example.charlieweather.data.Helper;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.charlieweather.data.ForecastForOneDay;
-import com.example.charlieweather.data.Helper;
+public class OnlyOne extends Activity {
 
-
-
-public class CityWeather extends Activity {
-	
 	private ForecastForOneDay forecast;
 	private TextView temperatureView;
 	private TextView weatherDescription;
 	private ListView weatherDetailsList;
+	private ImageView img;
 	
-	public void onCeate(Bundle savedInstanceState){
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		forecast = City.newActivityForecast;
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.fragment_city_weather);
+		setContentView(R.layout.activity_only_one);
 		setup();
+		setDetails(forecast);
 	}
 	
-	public void onCreateView(LayoutInflater inflater, ViewGroup container,
-	        Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_city_weather, container,false);
-		setContentView(R.layout.activity_main);
-				setup();
-				//return rootView;
-	    }
-	    
-
 	private void setup() {
 		temperatureView = (TextView)this.findViewById(R.id.temperatureViewOnly);
 		weatherDescription = (TextView)findViewById(R.id.weatherDetailsListOnly);
 		weatherDetailsList = (ListView)findViewById(R.id.weatherDescriptionOnly);
-		img = (ImageView)findViewById(R.id.weatherDetailsListOnly);
+		img = (ImageView)findViewById(R.id.weatherImageViewOnly);
 		forecast = City.newActivityForecast;
 		
 		String temperature = forecast.getTemperature().toString();
 		temperatureView.setText(temperature);
 		
+		String imgName = "i"+forecast.getImageUrl();
+        img.setImageResource(getResources().getIdentifier(imgName, "drawable", Helper.context.getPackageName()));
 		setDetails(forecast);
-		weatherDescription.setText(forecast.getDescription().toString());
-		
-		//new LoadImage().execute(forecast.getImageUrl());
-		
+		weatherDescription.setText(forecast.getDescription().toString());		
 	}
 	
 	
@@ -75,11 +58,4 @@ public class CityWeather extends Activity {
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, values);
         weatherDetailsList.setAdapter(adapter);
 	}
-	
-	Button load_img;
-	  ImageView img;
-	  Bitmap bitmap;
-	  ProgressDialog pDialog;
-	
-
 }

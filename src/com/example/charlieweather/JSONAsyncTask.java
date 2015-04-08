@@ -72,7 +72,7 @@ class JSONAsyncTask extends AsyncTask<String[], Void, List<CityInfo>> {
 				is.close();
 				json = sb.toString();
 				CityInfo city=ParseJson.getListOfForecastFromString(json);
-				if(city!=null)
+				if(city!=null && city.getList().size()!=0)
 					cityInfo.add(dataSource.createCityInfo(city));
 				else
 					db.removeCity(i);

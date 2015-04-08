@@ -22,7 +22,7 @@ public class ForecastDataSource {
 			MySQLiteHelper.COLUMN_DESCRIPTION, MySQLiteHelper.COLUMN_PRESSURE,
 			MySQLiteHelper.COLUMN_SPEED, MySQLiteHelper.COLUMN_CLOUDS,
 			MySQLiteHelper.COLUMN_HUMIDITY, MySQLiteHelper.COLUMN_SNOW,
-			MySQLiteHelper.COLUMN_RAIN };
+			MySQLiteHelper.COLUMN_RAIN,MySQLiteHelper.COLUMN_ICON};
 
 	public ForecastDataSource(MySQLiteHelper dbHelper, SQLiteDatabase database2) {
 		this.dbHelper = dbHelper;
@@ -61,7 +61,8 @@ public class ForecastDataSource {
 		values.put(MySQLiteHelper.COLUMN_CLOUDS, forecastForOneDay.getClouds());
 		values.put(MySQLiteHelper.COLUMN_SNOW, forecastForOneDay.getSnow());
 		values.put(MySQLiteHelper.COLUMN_RAIN, forecastForOneDay.getRain());
-		System.out.println(forecast.getSnow());
+		values.put(MySQLiteHelper.COLUMN_ICON, forecastForOneDay.getImageUrl());
+		
 		synchronized (database) {		long insertID = database
 				.insert(MySQLiteHelper.TABLE_FORECAST,null, values);
 		Cursor cursor = database.query(MySQLiteHelper.TABLE_FORECAST, allColumns,
@@ -71,6 +72,7 @@ public class ForecastDataSource {
 		forecast = cursorToForecast(cursor);
 		forecast.setTemperature(temp.createTemp(forecastForOneDay.getTemperature(),insertID));
 		cursor.close();}
+		System.out.println(forecast.getImageUrl());
 		return forecast;
 	}
 
@@ -87,6 +89,7 @@ public class ForecastDataSource {
 		forecast.setHumidity(cursor.getInt(8));
 		forecast.setSnow(cursor.getDouble(9));
 		forecast.setRain(cursor.getDouble(10));
+		forecast.setImageUrl(cursor.getString(11));
 		return forecast;
 	}
 	public void deleteForecast(ForecastForOneDay forecast) {
