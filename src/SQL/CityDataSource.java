@@ -103,4 +103,10 @@ public class CityDataSource {
 		cursor.close();	
 		return list;
 	}
+	public void removeCity(CityInfo city){
+		for(int i=0;i<city.getList().size();i++)
+			forecastDataSource.deleteForecast(city.getList().get(i));
+		database.delete(MySQLiteHelper.TABLE_CITY, MySQLiteHelper.COLUMN_ID
+				+ " = " + city.getID(), null);
+	}
 }

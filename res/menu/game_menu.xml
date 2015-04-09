@@ -6,6 +6,11 @@
           android:icon="@drawable/add"
           android:menuCategory="container"
           />
+  <item android:id="@+id/delete_city"
+          android:icon="@drawable/mail"
+          android:title="@string/delete_city"
+          android:menuCategory="container" 
+           />
     <item android:id="@+id/refresh"
           android:icon="@drawable/refresh"
           android:title="@string/refresh"

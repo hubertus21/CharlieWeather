@@ -26,5 +26,6 @@
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
     <string name="title_activity_only_one">OnlyOne</string>
+    <string name="delete_city">Remove selected city</string>
 
 </resources>

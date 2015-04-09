@@ -94,6 +94,7 @@ public class ForecastDataSource {
 	}
 	public void deleteForecast(ForecastForOneDay forecast) {
 		long id = forecast.getID();
+		temp.deleteTemperature(forecast.getTemperature());
 		database.delete(MySQLiteHelper.TABLE_FORECAST, MySQLiteHelper.COLUMN_ID_FORECAST
 				+ " = " + id, null);
 	}
@@ -120,6 +121,7 @@ public class ForecastDataSource {
 		cursor.moveToFirst();
 		ForecastForOneDay f=cursorToForecast(cursor);
 		return f.getDate();
+		
 		
 	}
 }

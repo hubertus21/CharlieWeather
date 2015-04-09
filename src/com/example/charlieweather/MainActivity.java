@@ -31,11 +31,6 @@ public class MainActivity extends FragmentActivity implements TabListener {
     private TabsPagerAdapter mAdapter;
     private ActionBar actionBar;
     public static List<City> cities;
-    //public static List<CityInfo> citiesInfo;
-    // Tab titles
-    //private String[] tabs = { "Kraków", "Nowy Jork", "Szikago", "Tokyo", "Smoleñsk" };
- 
-    
     
     private DataBase dataBase;
 	private ProgressDialog2 dialog;
@@ -61,27 +56,26 @@ public class MainActivity extends FragmentActivity implements TabListener {
 	private void setup() {
 		cities = new ArrayList<City>();
 		for(int i=0;i<dataBase.getList().size();i++){
-			//tabs[i] = Integer.toString(dataBase.getList().size());
 			cities.add(new City(dataBase.getList().get(i).getName(),dataBase.getList().get(i).getList()));
 		}
-		//Toast.makeText(getApplicationContext(), String.valueOf(cities.size()) , Toast.LENGTH_SHORT).show();
 	}
 	
 	private void init(){
+        setup();
 		viewPager = (ViewPager) findViewById(R.id.pager);
         actionBar = getActionBar();
         mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
- 
+        mAdapter.setSize(cities.size());
         viewPager.setAdapter(mAdapter);
         actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);        
  
+        actionBar.removeAllTabs();
         // Adding Tabs
         for (CityInfo city : dataBase.getList()) {
             actionBar.addTab(actionBar.newTab().setText(city.getCountry())
                     .setTabListener(this));
         }
-        setup();
         viewPager.setOnPageChangeListener(
                 new ViewPager.SimpleOnPageChangeListener() {
                     @Override
@@ -96,11 +90,6 @@ public class MainActivity extends FragmentActivity implements TabListener {
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
 		// TODO Auto-generated method stub
-		/*for(int i=0;i<5;i++){
-			tabs[i] = tabs[i]+1;
-		}
-		*/
-
 	}
 
 	@Override
@@ -135,6 +124,7 @@ public class MainActivity extends FragmentActivity implements TabListener {
 	    		task.execute(dataBase.getURL());
 	    		}}else
 	    		{
+	    			Toast.makeText(getApplicationContext(),getResources().getText(R.string.Internet_Is_Disabled),Toast.LENGTH_LONG).show();
 	    			dataBase.setList(dataSource.getAllInfo());
 	    			init();
 	    		}
@@ -147,6 +137,7 @@ public class MainActivity extends FragmentActivity implements TabListener {
 				@Override
 				public void run() {
 					//PO ODŒWIERZENIU
+					init();
 				}
 			});
     		task.execute(dataBase.getURL());
@@ -201,6 +192,13 @@ public class MainActivity extends FragmentActivity implements TabListener {
 	        		EmailService.sendMail(dataBase.getInfoInString(viewPager.getCurrentItem()));
 	        	else
 	        		Toast.makeText(this,getResources().getText(R.string.Internet_Is_Disabled),Toast.LENGTH_LONG).show();
+	        	return true;
+	        case R.id.delete_city:
+	        	if(mAdapter.getCount()>0){
+	        		dataSource.removeCity(dataBase.getList().get(actionBar.getSelectedNavigationIndex()));
+	        		dataBase.getList().remove(actionBar.getSelectedNavigationIndex());
+	        		init();
+	        	}
 	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
